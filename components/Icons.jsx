@@ -1,4 +1,4 @@
-import { MessageCircle, Heart, Repeat2 } from 'lucide-react'
+import { MessageCircle, Heart, Repeat2, Home, Bell, BellDot, Mail, User2, MoreHorizontal } from 'lucide-react'
 
 export const Icons = {
   MessageCircle: MessageCircle,
