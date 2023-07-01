@@ -4,7 +4,7 @@ import Link from 'next/link';
 const NavLinks = ({ name, icon, href }) => {
   return (
     <div>
-      <Link href={href} className="flex gap-2 mb-6 text-[13px] items-center">
+      <Link href={href} className="flex gap-2 mb-6 text-[13px] items-center text-white">
         {icon}
         <span className="hidden md:flex">{name}</span>
       </Link>
