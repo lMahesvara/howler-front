@@ -1,4 +1,17 @@
-import { MessageCircle, Heart, Repeat2, Home, Bell, BellDot, Mail, User2, MoreHorizontal } from 'lucide-react'
+
+import {
+  MessageCircle,
+  Heart,
+  Repeat2,
+  MoreHorizontal,
+  ArrowLeft,
+  CalendarDays,
+  Home,
+  Bell,
+  BellDot,
+  Mail,
+  User2
+} from 'lucide-react'
 
 export const Icons = {
   MessageCircle: MessageCircle,
@@ -10,4 +23,6 @@ export const Icons = {
   Messages: Mail,
   Profile: User2,
   MoreHorizontal: MoreHorizontal,
+  ArrowLeft: ArrowLeft,
+  CalendarDays: CalendarDays,
 }
