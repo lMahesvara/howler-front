@@ -3,40 +3,32 @@ import React from 'react'
 
 const LittleUser = () => {
   return (
-    <article
-      className='relative w-auto overflow-hidden bg-black cursor-pointer  border-[#2f3336]  flex max-w-full shrink hover:bg-gray-700 rounded-full mr-4 p-2'
-    >
-      <div className='flex flex-col w-full max-w-full shrink grow'>
-        <div>{/* Actions */}</div>
-        <div className='flex flex-row justify-start w-full max-w-full'>
-          <div className='sm:mr-3'>
+    <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full'>
+      <div className='flex flex-col max-w-full'>
+        <div className='flex flex-row justify-start'>
+          <div className='xl:mr-3'>
             <div className='w-10 h-10'>
               <img
                 src='https://picsum.photos/200/200'
                 alt=''
                 className='w-[40px] h-[40px] transition-opacity duration-200 rounded-full hover:opacity-80'
-              /> 
+              />
             </div>
           </div>
-          <div className='flex-col hidden w-full max-w-full shrink grow sm:flex'>
-            {/* header */}
-            <div className='flex items-start justify-between w-full max-w-full'>
-              <div className='flex flex-row flex-wrap w-full max-w-full shrink'>
-                <div>
-                  <Link
-                    className=' flex text-[13px] font-bold shrink w-full text-[#e7e9ea] hover:underline leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden '
-                    href='#'
-                  >
-                    El Programador Senior
-                  </Link>
-                </div>
-                <Link
-                  className='flex  text-[13px] font-normal shrink w-full text-[#71767b] leading-5  whitespace-nowrap overflow-ellipsis overflow-hidden '
-                  href='#'
-                >
-                  @5eniorDeveloper
-                </Link>
-              </div>
+          <div className='flex-col hidden max-w-[calc(100%-40px-1.5rem)] xl:flex'>
+            <div className='flex flex-col'>
+              <Link
+                className='text-[15px] font-bold text-[#e7e9ea] leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden'
+                href='#'
+              >
+                El Programador Seniorasdasdas
+              </Link>
+              <Link
+                className='text-[15px] font-normal shrink text-[#71767b] leading-5  whitespace-nowrap overflow-ellipsis overflow-hidden '
+                href='#'
+              >
+                @5eniorDeveloper
+              </Link>
             </div>
           </div>
         </div>
