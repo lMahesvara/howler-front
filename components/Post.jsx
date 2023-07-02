@@ -5,7 +5,7 @@ import { Icons } from './Icons'
 const Post = () => {
   return (
     <article
-      className='relative w-full px-4 overflow-hidden bg-black cursor-pointer border-b border-[#2f3336] hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200 flex max-w-full shrink
+      className='relative w-full px-4 overflow-hidden bg-black cursor-pointer border-b border-[#2f3336] hover:bg-[#ffffff08] transition-colors duration-200 flex max-w-full shrink
     '
     >
       <div className='flex flex-col max-w-full shrink grow'>
