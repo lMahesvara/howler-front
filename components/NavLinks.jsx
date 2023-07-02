@@ -1,15 +1,16 @@
-import React from 'react';
-import Link from 'next/link';
+import React from 'react'
+import Link from 'next/link'
 
 const NavLinks = ({ name, icon, href }) => {
   return (
-    <div>
-      <Link href={href} className="flex gap-2 mb-6 text-[13px] items-center text-white hover:bg-gray-700 rounded-full p-2">
-        {icon}
-        <span className="hidden sm:flex">{name}</span>
-      </Link>
-    </div>
-  );
-};
+    <Link
+      href={href}
+      className='flex gap-2 text-[13px] items-center text-white hover:bg-[#eff3f41a] rounded-full p-3 w-fit'
+    >
+      {icon}
+      <span className='hidden mr-4 xl:flex'>{name}</span>
+    </Link>
+  )
+}
 
-export default NavLinks;
+export default NavLinks
