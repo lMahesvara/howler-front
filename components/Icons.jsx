@@ -10,7 +10,8 @@ import {
   Bell,
   BellDot,
   Mail,
-  User2
+  User2,
+  FileImage
 } from 'lucide-react'
 
 export const Icons = {
@@ -25,4 +26,5 @@ export const Icons = {
   MoreHorizontal: MoreHorizontal,
   ArrowLeft: ArrowLeft,
   CalendarDays: CalendarDays,
+  FileImage: FileImage
 }
