@@ -2,6 +2,7 @@ import BackButton from '@/components/BackButton'
 import PageLayout from '@/components/PageLayout'
 import Post from '@/components/Post'
 import ProfileHeader from '@/components/ProfileHeader'
+import CreatePost from '@/components/CreatePost'
 
 export default function Profile() {
   return (
