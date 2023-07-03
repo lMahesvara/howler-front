@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import PageLayout from '@/components/PageLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={inter.className + ` flex min-h-screen`}>
         <Navbar />
-        {children}
+        <PageLayout>{children}</PageLayout>
       </body>
     </html>
   )
