@@ -19,8 +19,8 @@ const CreatePost = () => {
         <div className='box-border flex flex-col shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)]'>
           <input
             type='text'
-            className='p-2 pl-4 bg-[#eff3f41a] rounded-full placeholder-gray'
-            placeholder='¿Qué estás pensando?'
+            className='p-2 pl-4 bg-[#eff3f41a] rounded-full placeholder-gray focus:ring-0 focus:outline-none'
+            placeholder='What is happening?!'
           />
 
           <div className='box-border flex flex-row shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)] justify-between items-center mt-4 ml-4 px-6'>
@@ -28,10 +28,10 @@ const CreatePost = () => {
               textColor='text-[#eff3f4]'
               textColorHover='hover:text-white'
               bgColorHover='hover:bg-[rgba(239,243,244,0.1)]'
-              title='Foto'
+              title='Picture'
             >
               <Icons.FileImage className='w-[20px]' />
-              <span className='text-[13px] leading-4 '>Foto</span>
+              <span className='text-[13px] leading-4 '>Picture</span>
             </RoundedButtonLayout>
             <input
               type='submit'
