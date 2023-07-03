@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Icons } from './Icons'
-import RoundedButtonLayout from './RoundedButtonLayout'
 
 const ProfileHeader = () => {
   return (

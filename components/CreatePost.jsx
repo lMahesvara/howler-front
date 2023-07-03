@@ -1,18 +1,17 @@
 import React from 'react'
 import { Icons } from './Icons'
+import RoundedButtonLayout from './RoundedButtonLayout'
 
 const CreatePost = () => {
   return (
-    <article
-      className='relative w-full p-4 overflow-hidden bg-black border-b border-[#2f3336] hover:bg-[#ffffff08] transition-colors duration-200 flex max-w-full shrink  pt-6'
-    >
+    <article className='relative w-full p-4 overflow-hidden bg-black border-y border-[#2f3336] flex max-w-full shrink pt-6'>
       <div className='flex flex-row max-w-full shrink grow basis-auto'>
         <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
           <div className='w-10 h-10'>
             <img
               src='https://picsum.photos/200/200'
               alt=''
-              className='w-full h-full transition-opacity duration-200 rounded-full hover:opacity-80 cursor-pointer'
+              className='w-full h-full transition-opacity duration-200 rounded-full cursor-pointer hover:opacity-80'
             />
           </div>
         </div>
@@ -20,19 +19,24 @@ const CreatePost = () => {
         <div className='box-border flex flex-col shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)]'>
           <input
             type='text'
-            className='rounded-full placeholder-gray bg-gray-800 p-2 pl-4'
+            className='p-2 pl-4 bg-[#eff3f41a] rounded-full placeholder-gray'
             placeholder='¿Qué estás pensando?'
           />
 
-          <div className='box-border flex flex-row shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)] justify-center mt-4 ml-4 px-6'>
-            <div className='box-border flex flex-row shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)] gap-2 text-[13px] items-center'>
-                <span> <Icons.FileImage className='w-[20px]'/> </span>
-                <button>Foto</button>
-            </div>
+          <div className='box-border flex flex-row shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)] justify-between items-center mt-4 ml-4 px-6'>
+            <RoundedButtonLayout
+              textColor='text-[#eff3f4]'
+              textColorHover='hover:text-white'
+              bgColorHover='hover:bg-[rgba(239,243,244,0.1)]'
+              title='Foto'
+            >
+              <Icons.FileImage className='w-[20px]' />
+              <span className='text-[13px] leading-4 '>Foto</span>
+            </RoundedButtonLayout>
             <input
               type='submit'
-              value='HOWL'
-              className='bg-white w-16 h-7 rounded-full text-black text-[15px]'
+              value='Howl'
+              className='bg-white cursor-pointer w-16 h-7 rounded-full text-black text-[15px]'
             />
           </div>
         </div>

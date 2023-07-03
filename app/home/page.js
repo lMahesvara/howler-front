@@ -1,3 +1,4 @@
+import CreatePost from '@/components/CreatePost'
 import PageLayout from '@/components/PageLayout'
 import Post from '@/components/Post'
 
@@ -11,6 +12,7 @@ export default function Home() {
           </PageLayout.HeaderTitle>
         </div>
       </PageLayout.Header>
+      <CreatePost />
       <section className='w-full'>
         <Post />
         <Post />
