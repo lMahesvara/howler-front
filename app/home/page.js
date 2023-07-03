@@ -8,7 +8,7 @@ export default function Home() {
       <PageLayout.Header>
         <div className='flex flex-col items-start justify-center flex-grow'>
           <PageLayout.HeaderTitle className='text-[#e7e9ea] whitespace-nowrap font-bold text-[17px] leading-5 sm:text-xl'>
-            Kura
+            Home
           </PageLayout.HeaderTitle>
         </div>
       </PageLayout.Header>
