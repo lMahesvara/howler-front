@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className={inter.className + ` flex min-h-screen`}>
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
       </body>
     </html>
