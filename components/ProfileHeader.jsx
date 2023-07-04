@@ -1,32 +1,10 @@
 import Link from 'next/link'
 import { Icons } from './Icons'
-import RoundedButtonLayout from './RoundedButtonLayout'
+import CounterLink from './CounterLink'
 
 const ProfileHeader = () => {
   return (
-    <section className='pt-[53px] relative'>
-      <div
-        className='h-[53px] flex items-center justify-start px-4 fixed top-0  z-10 w-full backdrop-filter backdrop-blur-md bg-[rgba(0,0,0,0.5)]
-      '
-      >
-        <div className='min-h-[32px] min-w-[56px] flex items-center justify-start'>
-          <RoundedButtonLayout
-            title='Go back'
-            textColor='text-[#eff3f4]'
-            bgColorHover='hover:bg-[rgba(239,243,244,0.1)]'
-          >
-            <Icons.ArrowLeft className='w-5 h-5 text-inherit' />
-          </RoundedButtonLayout>
-        </div>
-        <div className='flex flex-col items-start justify-center flex-grow'>
-          <h2 className='text-[#e7e9ea] whitespace-nowrap font-bold text-[17px] leading-5 sm:text-xl'>
-            Kura
-          </h2>
-          <h3 className='text-[#71767b] whitespace-nowrap font-normal text-[13px] leading-4'>
-            570 Howls
-          </h3>
-        </div>
-      </div>
+    <section className='flex flex-col'>
       <div className='flex flex-col'>
         {/* banner */}
         <div className='w-full h-full overflow-hidden '>
@@ -67,18 +45,8 @@ const ProfileHeader = () => {
             </p>
           </div>
           <div className='flex flex-wrap flex-1 '>
-            <Link
-              className='mr-5 hover:underline text-[#e7e9ea] text-sm leading-4'
-              href='#'
-            >
-              294 <span className='text-[#71767b]'>Siguiendo</span>
-            </Link>
-            <Link
-              className='mr-5 hover:underline text-[#e7e9ea] text-sm leading-4'
-              href='#'
-            >
-              124 <span className='text-[#71767b]'>Seguidores</span>
-            </Link>
+            <CounterLink href='#' count={294} text={'Siguiendo'} />
+            <CounterLink href='#' count={124} text={'Seguidores'} />
           </div>
         </div>
       </div>
