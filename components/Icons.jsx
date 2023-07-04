@@ -9,6 +9,7 @@ import {
   Home,
   Bell,
   BellDot,
+  Search,
   Mail,
   User2,
   FileImage
@@ -26,5 +27,6 @@ export const Icons = {
   MoreHorizontal: MoreHorizontal,
   ArrowLeft: ArrowLeft,
   CalendarDays: CalendarDays,
+  Search: Search
   FileImage: FileImage
 }
