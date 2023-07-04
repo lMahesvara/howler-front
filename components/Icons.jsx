@@ -9,6 +9,7 @@ import {
   Home,
   Bell,
   BellDot,
+  Search,
   Mail,
   User2
 } from 'lucide-react'
@@ -25,4 +26,5 @@ export const Icons = {
   MoreHorizontal: MoreHorizontal,
   ArrowLeft: ArrowLeft,
   CalendarDays: CalendarDays,
+  Search: Search
 }
