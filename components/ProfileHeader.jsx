@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Icons } from './Icons'
+import CounterLink from './CounterLink'
 
 const ProfileHeader = () => {
   return (
@@ -44,18 +45,8 @@ const ProfileHeader = () => {
             </p>
           </div>
           <div className='flex flex-wrap flex-1 '>
-            <Link
-              className='mr-5 hover:underline text-[#e7e9ea] text-sm leading-4'
-              href='#'
-            >
-              294 <span className='text-[#71767b]'>Siguiendo</span>
-            </Link>
-            <Link
-              className='mr-5 hover:underline text-[#e7e9ea] text-sm leading-4'
-              href='#'
-            >
-              124 <span className='text-[#71767b]'>Seguidores</span>
-            </Link>
+            <CounterLink href='#' count={294} text={'Siguiendo'} />
+            <CounterLink href='#' count={124} text={'Seguidores'} />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Icons } from './Icons'
+import RoundedButtonLayout from './RoundedButtonLayout'
 
 const Post = () => {
   return (
@@ -12,7 +13,7 @@ const Post = () => {
         {/* Actions */}
         <div className='pt-3 basis-0 grow'>
           {/* Rehowled */}
-          <div className='flex mb-1 -m-1'>
+          {/* <div className='flex mb-1 -m-1'>
             <div className='flex items-center justify-end mr-3 basis-10 grow-0'>
               <Icons.Repeat2 className='w-4 h-4 text-[#71767b]' />
             </div>
@@ -24,7 +25,7 @@ const Post = () => {
                 You Rehowled
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* Content */}
         <div className='flex flex-row max-w-full shrink grow basis-auto'>
@@ -86,24 +87,33 @@ const Post = () => {
               />
             </div>
             <div className='flex justify-start gap-6 mt-3'>
-              <button className='relative bg-transparent max-w-min hover:text-[#1d9bf0] text-[#71767b] flex items-center gap-1'>
-                <span className='sr-only'>Reply</span>
-                <div className='absolute top-0 right-0 left-0 bottom-0  rounded-full hover:bg-[rgba(29,155,240,0.1)] transition-colors duration-200 inline-flex -m-2'></div>
+              <RoundedButtonLayout
+                title={'Reply'}
+                bgColorHover='hover:bg-[#1d9bf01a]'
+                textColorHover='hover:text-[#1d9bf0]'
+                textColor={'text-[#71767b]'}
+              >
                 <Icons.MessageCircle className='w-5 h-5 text-inherit' />
                 <span className='text-[13px] leading-4 '>100</span>
-              </button>
-              <button className='relative bg-transparent max-w-min hover:text-[rgb(0,186,124)] text-[#71767b] flex items-center gap-1'>
-                <span className='sr-only'>Rehowl</span>
-                <div className='absolute top-0 right-0 left-0 bottom-0  rounded-full hover:bg-[rgba(0,186,124,0.1)] transition-colors duration-200 inline-flex -m-2'></div>
+              </RoundedButtonLayout>
+              <RoundedButtonLayout
+                title={'Rehowl'}
+                bgColorHover='hover:bg-[#00ba7c1a]'
+                textColorHover='hover:text-[#00b87a]'
+                textColor={'text-[#71767b]'}
+              >
                 <Icons.Repeat2 className='w-5 h-5 text-inherit' />
                 <span className='text-[13px] leading-4 '>325</span>
-              </button>
-              <button className='relative bg-transparent max-w-min hover:text-[rgb(249,24,128)] text-[#71767b] flex items-center gap-1'>
-                <span className='sr-only'>like</span>
-                <div className='absolute top-0 right-0 left-0 bottom-0  rounded-full hover:bg-[rgba(249,24,128,0.1)] transition-colors duration-200 inline-flex -m-2'></div>
+              </RoundedButtonLayout>
+              <RoundedButtonLayout
+                title={'Like'}
+                bgColorHover='hover:bg-[#f918801a]'
+                textColorHover='hover:text-[#f91880]'
+                textColor={'text-[#71767b]'}
+              >
                 <Icons.Heart className='w-5 h-5 text-inherit' />
                 <span className='text-[13px] leading-4 '>2,793</span>
-              </button>
+              </RoundedButtonLayout>
             </div>
           </div>
         </div>
