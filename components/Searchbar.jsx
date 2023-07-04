@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Icons } from './Icons'
 import RoundedButtonLayout from './RoundedButtonLayout'
 
-const searchBar = () => {
+const SearchBar = () => {
   return (
     <section>
       <div className='flex flex-wrap flex-1 '>
@@ -20,4 +20,4 @@ const searchBar = () => {
   )
 }
 
-export default searchBar 
+export default SearchBar 
