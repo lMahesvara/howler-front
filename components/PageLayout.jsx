@@ -13,7 +13,7 @@ const PageContainer = React.forwardRef(({ children }, ref) => {
   return (
     <main
       ref={ref}
-      className=' flex flex-col items-center border border-[#2f3336] w-full min-h-screen grow shrink max-w-[600px] h-full'
+      className=' flex flex-col items-center border-x border-[#2f3336] w-full min-h-screen grow shrink max-w-[600px] h-full'
     >
       {children}
     </main>
