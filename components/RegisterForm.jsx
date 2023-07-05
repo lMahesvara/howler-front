@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import StepComponent from './StepComponent'
+import ModalLogin from './ModalLogin'
 
 const RegisterForm = () => {
+
+  const [showModal, setShowModal] = useState(false)
+
+  const handleOpenModal = () =>{
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () =>{
+    setShowModal(false)
+  }
+
   return (
     <section className='py-16 shrink grow s:pb-8'>
       <h1 className='text-4xl font-bold s:hidden'>
@@ -10,8 +23,10 @@ const RegisterForm = () => {
       <p className='mt-32 text-2xl font-semibold s:mt-0'>Join Howler today.</p>
       <div className='flex flex-col items-center justify-center w-[55%] gap-5 mt-14'>
         <button
-          type='submit'
-          className='w-full h-12 px-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis'>
+          type='button'
+          onClick={handleOpenModal}
+          className='w-full h-12 px-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis'
+        >
           Sign up
         </button>
 
@@ -33,21 +48,21 @@ const RegisterForm = () => {
 
         <div>
           <p className='w-full text-xs italic'>
-            By signing up, you agree to the{' '}
+            By signing up, you agree to the 
             <a
               className='text-xs italic underline hover:text-blue-600'
               href='#'
             >
-              Terms of Service
-            </a>{' '}
-            and{' '}
+               Terms of Service 
+            </a>
+            and 
             <a
               className='text-xs italic underline hover:text-blue-600'
               href='#'
             >
               Privacy Policy
             </a>
-            , including the{' '}
+            , including the
             <a
               className='text-xs italic underline hover:text-blue-600'
               href='#'
@@ -57,6 +72,8 @@ const RegisterForm = () => {
           </p>
         </div>
       </div>
+      
+      {showModal && <StepComponent handleCloseModal={() => setShowModal(false)}/>}
     </section>
   )
 }
