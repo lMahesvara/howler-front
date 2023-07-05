@@ -2,8 +2,15 @@ import Link from 'next/link'
 import { Icons } from './Icons'
 import CounterLink from './CounterLink'
 import RoundedButtonLayout from './RoundedButtonLayout'
+import { useUser } from '@/hooks/useUser'
 
-const ExtendedPost = () => {
+const ExtendedPost = ({ howl }) => {
+  const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
+
+  const { user: userData, isLoading } = useUser(user)
+
+  if (isLoading) return null
+
   return (
     <article className='relative flex w-full max-w-full px-4 overflow-hidden bg-black shrink '>
       <div className='flex flex-col max-w-full shrink grow'>
@@ -16,7 +23,7 @@ const ExtendedPost = () => {
             </div>
             <div className='flex items-center justify-start basis-0 grow shrink'>
               <Link
-                href='#'
+                href={`/${userData.username}`}
                 className='text-[13px] font-semibold cursor-pointer hover:underline text-[#71767b] leading-4 whitespace-nowrap overflow-ellipsis overflow-hidden'
               >
                 You Rehowled
@@ -36,23 +43,21 @@ const ExtendedPost = () => {
           <div className='flex flex-col max-w-full shrink grow'>
             <Link
               className='text-[15px] font-bold shrink text-[#e7e9ea] hover:underline leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden w-min'
-              href='#'
+              href={`/${userData.username}`}
             >
-              Miguel Ángel Durán
+              {userData.name}
             </Link>
             <Link
-              className='text-[15px] font-normal shrink text-[#71767b] leading-5 ml-1 whitespace-nowrap overflow-ellipsis overflow-hidden w-min'
-              href='#'
+              className='text-[15px] font-normal shrink text-[#71767b] leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden w-min'
+              href={`/${userData.username}`}
             >
-              @midudev
+              @{userData.username}
             </Link>
           </div>
         </div>
 
         <p className='text-[rgb(231,233,234)] font-normal text-[17px] leading-6- relative whitespace-pre-wrap mt-3'>
-          {
-            '¿Sabías que puedes agrupar archivos en Visual Studio Code? \n\nLa opción se llama File Nesting y es totalmente configurable. \n\nPor ejemplo, puedes ocultar todos los archivos de configuración... \n\n¡Pero todavía tenerlos accesibles desde el package.json!'
-          }
+          {text}
         </p>
         <div className='mt-3 rounded-2xl border border-[#2f3336] overflow-hidden w-full h-full grow'>
           <img
@@ -70,9 +75,21 @@ const ExtendedPost = () => {
           </Link>
         </div>
         <div className='flex flex-wrap gap-5 border-y border-[#2f3336] py-4 justify-evenly'>
-          <CounterLink href={'#'} amount={156} text={'Rehowls'} />
-          <CounterLink href={'#'} amount={949} text={'Me gusta'} />
-          <CounterLink href={'#'} amount={12} text={'Comentarios'} />
+          <CounterLink
+            href={'#'}
+            amount={replies.length ?? 0}
+            text={'Comentarios'}
+          />
+          <CounterLink
+            href={'#'}
+            amount={rehowls.length ?? 0}
+            text={'Rehowls'}
+          />
+          <CounterLink
+            href={'#'}
+            amount={replies.length ?? 0}
+            text={'Me gusta'}
+          />
         </div>
         <div className='flex flex-wrap gap-5 justify-around border-b py-3 border-[#2f3336]'>
           <RoundedButtonLayout
