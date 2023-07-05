@@ -1,13 +1,28 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
 import { Icons } from './Icons'
 import RoundedButtonLayout from './RoundedButtonLayout'
+import { useUser } from '@/hooks/useUser'
+import { useRouter } from 'next/navigation'
+import { useHowl } from '@/hooks/useHowl'
 
-const Post = () => {
+const Post = ({ idHowl }) => {
+  console.log('idHowl', idHowl)
+  const router = useRouter()
+
+  const { howl, isLoading: isLoadingHowl } = useHowl(idHowl)
+
+  const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
+
+  const { user: userData = {}, isLoading: isLoadingUser } = useUser(user ?? '')
+
+  if (isLoadingUser || isLoadingHowl) return null
+
   return (
     <article
-      className='relative w-full px-4 overflow-hidden bg-black cursor-pointer border-b border-[#2f3336] hover:bg-[#ffffff08] transition-colors duration-200 flex max-w-full shrink
-    '
+      className='relative w-full px-4 overflow-hidden bg-black cursor-pointer border-b border-[#2f3336] hover:bg-[#ffffff08] transition-colors duration-200 flex max-w-full shrink'
+      onClick={() => router.push(`/${userData.username}/status/${howl._id}`)}
     >
       <div className='flex flex-col max-w-full shrink grow'>
         {/* Actions */}
@@ -30,13 +45,13 @@ const Post = () => {
         {/* Content */}
         <div className='flex flex-row max-w-full shrink grow basis-auto'>
           <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
-            <div className='w-10 h-10'>
+            <Link className='w-10 h-10' href={`/${userData?.username}`}>
               <img
                 src='https://picsum.photos/200/200'
                 alt=''
                 className='w-full h-full transition-opacity duration-200 rounded-full hover:opacity-80'
               />
-            </div>
+            </Link>
           </div>
 
           <div className='box-border flex flex-col pb-3 shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)]'>
@@ -45,15 +60,15 @@ const Post = () => {
               <div className='flex flex-row max-w-full shrink grow'>
                 <Link
                   className='text-[15px] font-bold shrink text-[#e7e9ea] hover:underline leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden '
-                  href='#'
+                  href={`/${userData.username}`}
                 >
-                  El Programador Senior
+                  {userData?.name ?? 'User'}
                 </Link>
                 <Link
                   className='text-[15px] font-normal shrink text-[#71767b] leading-5 ml-1 whitespace-nowrap overflow-ellipsis overflow-hidden'
-                  href='#'
+                  href={`/${userData.username}`}
                 >
-                  @5eniorDeveloper
+                  @{userData?.username ?? 'user'}
                 </Link>
                 <span className='text-[15px] font-bold shrink-0 text-[#71767b] leading-5 px-1'>
                   •
@@ -76,16 +91,21 @@ const Post = () => {
             </div>
             {/* text */}
             <p className='text-[rgb(231,233,234)] font-normal text-[15px] leading-5 relative whitespace-pre-wrap'>
-              El cliente explicándome el requerimiento
+              {text}
             </p>
             {/* Image */}
-            <div className='mt-3 rounded-2xl border border-[rgb(47,51,54)] overflow-hidden w-full h-full grow'>
-              <img
-                src='https://pbs.twimg.com/media/FrgThLgWYAEh0I-?format=jpg&name=small'
-                alt=''
-                className='object-cover w-full h-full transition-opacity duration-200 rounded-2xl hover:opacity-80 '
-              />
-            </div>
+            {image && (
+              <div className='mt-3 rounded-2xl border border-[rgb(47,51,54)] overflow-hidden w-full h-full grow'>
+                <img
+                  src={
+                    image ||
+                    'https://pbs.twimg.com/media/FrgThLgWYAEh0I-?format=jpg&name=small'
+                  }
+                  alt=''
+                  className='object-cover w-full h-full transition-opacity duration-200 rounded-2xl hover:opacity-80 '
+                />
+              </div>
+            )}
             <div className='flex justify-start gap-6 mt-3'>
               <RoundedButtonLayout
                 title={'Reply'}
@@ -94,7 +114,9 @@ const Post = () => {
                 textColor={'text-[#71767b]'}
               >
                 <Icons.MessageCircle className='w-5 h-5 text-inherit' />
-                <span className='text-[13px] leading-4 '>100</span>
+                <span className='text-[13px] leading-4 '>
+                  {replies?.length ?? 0}
+                </span>
               </RoundedButtonLayout>
               <RoundedButtonLayout
                 title={'Rehowl'}
@@ -103,7 +125,9 @@ const Post = () => {
                 textColor={'text-[#71767b]'}
               >
                 <Icons.Repeat2 className='w-5 h-5 text-inherit' />
-                <span className='text-[13px] leading-4 '>325</span>
+                <span className='text-[13px] leading-4 '>
+                  {rehowls?.length ?? 0}
+                </span>
               </RoundedButtonLayout>
               <RoundedButtonLayout
                 title={'Like'}
@@ -112,7 +136,9 @@ const Post = () => {
                 textColor={'text-[#71767b]'}
               >
                 <Icons.Heart className='w-5 h-5 text-inherit' />
-                <span className='text-[13px] leading-4 '>2,793</span>
+                <span className='text-[13px] leading-4 '>
+                  {likes?.length ?? 0}
+                </span>
               </RoundedButtonLayout>
             </div>
           </div>
