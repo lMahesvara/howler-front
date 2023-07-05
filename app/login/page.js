@@ -1,7 +1,8 @@
 import React from 'react'
 import RegisterForm  from '../../components/RegisterForm'
 import LoginForm from '../../components/LoginForm'
-import ModalLogin from '@/components/ModalLogin'
+import ModalPassword from '@/components/ModalPassword'
+import ModalSignUp from '@/components/ModalSignUp'
 
 const page = () => {
   return (
@@ -16,7 +17,7 @@ const page = () => {
           <LoginForm/>
         </section>
       </main>
-      <ModalLogin/>
+      <ModalPassword/>
     </div>
   )
 }
