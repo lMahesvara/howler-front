@@ -1,8 +1,8 @@
+'use client'
 import React from 'react'
 import RegisterForm  from '../../components/RegisterForm'
 import LoginForm from '../../components/LoginForm'
-import ModalPassword from '@/components/ModalPassword'
-import ModalSignUp from '@/components/ModalSignUp'
+import StepComponent from '@/components/StepComponent'
 
 const page = () => {
   return (
@@ -17,7 +17,7 @@ const page = () => {
           <LoginForm/>
         </section>
       </main>
-      <ModalPassword/>
+   
     </div>
   )
 }
