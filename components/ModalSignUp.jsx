@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icons } from './Icons'
 
-const ModalLogin = () => {
+const ModalSignUp = () => {
   return (
     <div class='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
       <div class='relative w-3/4 max-w-xl mx-auto bg-black shadow-lg rounded-3xl py-6 sm:w-full'>
@@ -11,38 +11,51 @@ const ModalLogin = () => {
           </svg>
         </button>
 
-        <h1 class='py-4 text-3xl font-bold text-center text-white'>Log in</h1>
+        <h1 class='py-4 text-3xl font-bold text-center text-white'>Sign Up</h1>
 
         <div class='flex flex-col items-center justify-center p-6'>
           <form action='#'>
             <div class='relative w-full h-10 mt-8'>
               <span class='absolute right-0 top-2'>
-                <Icons.Profile/>
+                <Icons.Profile />
               </span>
               <input
                 class='w-full h-full bg-black focus:outline-none border-b-4 border-transparent border-b-white'
                 type='text'
                 required
-                placeholder='Username'
+                placeholder='Name'
               />
             </div>
 
             <div class='relative w-full h-10 my-8'>
               <span class='absolute right-0 top-2'>
-                <Icons.Lock/>
+                <Icons.Profile />
               </span>
               <input
                 class='w-full h-full bg-black focus:outline-none border-b-4 border-transparent border-b-white'
                 type='text'
-                placeholder='Password'
+                placeholder='Username'
                 required
               />
             </div>
+
+            <div class='relative w-full h-10 my-8'>
+              <span class='absolute right-0 top-2'>
+                <Icons.Messages />
+              </span>
+              <input
+                class='w-full h-full bg-black focus:outline-none border-b-4 border-transparent border-b-white'
+                type='email'
+                placeholder='Email'
+                required
+              />
+            </div>
+
             <button
               type='submit'
               class='w-full h-8 my-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis'
             >
-              Log in
+              Next
             </button>
           </form>
         </div>
@@ -51,4 +64,4 @@ const ModalLogin = () => {
   )
 }
 
-export default ModalLogin
+export default ModalSignUp
