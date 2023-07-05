@@ -2,43 +2,29 @@ import React, { useState } from 'react'
 import ModalSignUp from './ModalSignUp'
 import ModalPassword from './ModalPassword'
 
-const StepComponent = ({ compra, handleCompra }) => {
+const StepComponent = ({handleCloseModal}) => {
   const [step, setStep] = useState(1)
 
   const handleNextStep = () => {
     setStep(step + 1)
   }
 
-  const handlePrevStep = (steps = 1) => {
-    setStep(step - steps)
+  const handlePrevStep = () => {
+    setStep(step - 1)
   }
 
   switch (step) {
     case 1:
-      return (
-        <ModalSignUp
-          handleNextStep={handleNextStep}
-          compra={compra}
-          handleCompra={handleCompra}
-        />
-      )
+      return <ModalSignUp 
+      handleNextStep={handleNextStep} 
+      handleCloseModal={handleCloseModal}
+      />
     case 2:
-      return (
-        <ModalPassword
-          handlePrevStep={handlePrevStep}
-          handleNextStep={handleNextStep}
-          compra={compra}
-          handleCompra={handleCompra}
-        />
-      )
+      return <ModalPassword 
+      handlePrevStep={handlePrevStep}
+      handleCloseModal={handleCloseModal} />
     default:
-      return (
-        <ModalSignUp
-          handleNextStep={handleNextStep}
-          compra={compra}
-          handleCompra={handleCompra}
-        />
-      )
+      return null
   }
 }
 
