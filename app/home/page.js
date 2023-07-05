@@ -1,8 +1,21 @@
+'use client'
+import { useEffect } from 'react'
 import CreatePost from '@/components/CreatePost'
 import PageLayout from '@/components/PageLayout'
 import Post from '@/components/Post'
+import { getHome } from '@/services/api'
+import useSWR from 'swr'
 
 export default function Home() {
+  const { data, error, isLoading } = useSWR('/api/howls', () => getHome())
+
+  useEffect(() => {
+    if (data) console.log(data)
+  }, [data])
+
+  if (isLoading) return <div>Loading...</div>
+
+  if (error) return <div>Error</div>
   return (
     <PageLayout.Container>
       <PageLayout.Header>
@@ -14,11 +27,9 @@ export default function Home() {
       </PageLayout.Header>
       <CreatePost />
       <section className='w-full'>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {data?.map((howl, index) => (
+          <Post key={index} idHowl={howl._id} />
+        ))}
       </section>
     </PageLayout.Container>
   )
