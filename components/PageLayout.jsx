@@ -19,6 +19,7 @@ const PageContainer = React.forwardRef(({ children }, ref) => {
     </main>
   )
 })
+
 PageContainer.displayName = 'PageMain'
 
 const PageHeader = React.forwardRef(({ children }, ref) => {
