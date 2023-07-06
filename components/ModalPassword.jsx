@@ -1,11 +1,50 @@
 import React from 'react'
 import { Icons } from './Icons'
+import { toast } from 'sonner'
+import { postUser } from '@/services/api'
 
-const ModalPassword = ({ handlePrevStep, handleCloseModal }) => {
+const ModalPassword = ({
+  handlePrevStep,
+  handleCloseModal,
+  updateUser,
+  user,
+}) => {
+  const actionData = event => {
+    event.preventDefault()
+    const data = new FormData(event.target)
+
+    const pass = {
+      password: data.get('password'),
+      confirmPassword: data.get('confirmPassword'),
+    }
+
+    if (pass.password !== pass.confirmPassword) {
+      return toast.error("Passwords doesn't match")
+    }
+
+    updateUser({
+      password: pass.password,
+    })
+
+    const newUser = {
+      ...user,
+      password: pass.password,
+    }
+
+    postUser(newUser)
+      .then(res => {
+        toast.success('User created successfully')
+        handleCloseModal()
+      })
+      .catch(err => {
+        toast.error('Error creating user')
+      })
+  }
+
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
       <div className='relative w-3/4 max-w-xl py-6 mx-auto bg-black shadow-lg rounded-3xl sm:w-full'>
-      <button
+        <button
           className='absolute top-0 right-0 z-50 flex items-center justify-center w-10 h-10 mt-4 mr-4 text-2xl font-bold text-white bg-black rounded-full focus:outline-none hover:bg-gray-700'
           type='button'
           onClick={handleCloseModal}
@@ -20,14 +59,17 @@ const ModalPassword = ({ handlePrevStep, handleCloseModal }) => {
         </h1>
 
         <div className='flex flex-col items-center justify-center p-6'>
-          <form action='#'>
+          <form onSubmit={actionData}>
             <div className='relative w-full h-10 mt-8'>
               <span className='absolute right-0 top-2'>
                 <Icons.Lock />
               </span>
               <input
                 className='w-full h-full bg-black border-b-4 border-transparent focus:outline-none border-b-white'
-                type='text'
+                type='password'
+                name='password'
+                maxLength={20}
+                minLength={8}
                 required
                 placeholder='Password'
               />
@@ -39,7 +81,10 @@ const ModalPassword = ({ handlePrevStep, handleCloseModal }) => {
               </span>
               <input
                 className='w-full h-full bg-black border-b-4 border-transparent focus:outline-none border-b-white'
-                type='text'
+                type='password'
+                name='confirmPassword'
+                maxLength={20}
+                minLength={8}
                 placeholder='Repeat Password'
                 required
               />
@@ -53,7 +98,6 @@ const ModalPassword = ({ handlePrevStep, handleCloseModal }) => {
               >
                 Prev
               </button>
-
               <button
                 type='submit'
                 className='w-full h-8 my-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis'

@@ -1,7 +1,26 @@
 import React, { useState } from 'react'
 import { Icons } from './Icons'
 
-const ModalSignUp = ({ handleNextStep, handleCloseModal }) => {
+const ModalSignUp = ({
+  handleNextStep,
+  handleCloseModal,
+  updateUser,
+  user,
+}) => {
+  const actionData = event => {
+    event.preventDefault()
+    const data = new FormData(event.target)
+
+    const user = {
+      name: data.get('name'),
+      username: data.get('username'),
+      email: data.get('email'),
+    }
+
+    updateUser(user)
+    handleNextStep()
+  }
+
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
       <div className='relative w-3/4 max-w-xl py-6 mx-auto bg-black shadow-lg rounded-3xl sm:w-full'>
@@ -20,16 +39,19 @@ const ModalSignUp = ({ handleNextStep, handleCloseModal }) => {
         </h1>
 
         <div className='flex flex-col items-center justify-center p-6'>
-          <form action='#'>
+          <form onSubmit={actionData}>
             <div className='relative w-full h-10 mt-8'>
               <span className='absolute right-0 top-2'>
                 <Icons.Profile />
               </span>
               <input
-                className='w-full h-full bg-black border-b-4 border-transparent focus:outline-none border-b-white'
+                className='w-full h-full pr-8 bg-black border-b-4 border-transparent focus:outline-none border-b-white'
                 type='text'
+                name='name'
                 required
                 placeholder='Name'
+                maxLength={20}
+                defaultValue={user.name ?? ''}
               />
             </div>
 
@@ -38,9 +60,12 @@ const ModalSignUp = ({ handleNextStep, handleCloseModal }) => {
                 <Icons.Profile />
               </span>
               <input
-                className='w-full h-full bg-black border-b-4 border-transparent focus:outline-none border-b-white'
+                className='w-full h-full pr-8 bg-black border-b-4 border-transparent focus:outline-none border-b-white'
                 type='text'
+                name='username'
                 placeholder='Username'
+                maxLength={20}
+                defaultValue={user.username ?? ''}
                 required
               />
             </div>
@@ -50,16 +75,18 @@ const ModalSignUp = ({ handleNextStep, handleCloseModal }) => {
                 <Icons.Messages />
               </span>
               <input
-                className='w-full h-full bg-black border-b-4 border-transparent focus:outline-none border-b-white'
+                className='w-full h-full pr-8 bg-black border-b-4 border-transparent focus:outline-none border-b-white'
                 type='email'
+                name='email'
+                maxLength={40}
                 placeholder='Email'
+                defaultValue={user.email ?? ''}
                 required
               />
             </div>
 
             <button
-              type='button'
-              onClick={handleNextStep}
+              type='submit'
               className='w-full h-8 my-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis'
             >
               Next
