@@ -15,6 +15,20 @@ export const getUser = async id => {
   }
 }
 
+export const postUser = async userObject =>{
+  try {
+    return await (await fetch(`${API_URL}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userObject)
+    })).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getHowl = async id => {
   try {
     return await (await fetch(`${API_URL}/howls/${id}`)).json()
