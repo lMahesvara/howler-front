@@ -10,7 +10,7 @@ const ModalLogin = ({ handleCloseModal }) => {
       const username = data.get('username')
       const password = data.get('password')
       
-      console.log(await signIn("credentials",{username, password, redirect: false, callbackUrl:'/home'}))
+      console.log(await signIn("credentials",{username, password, redirect: true, callbackUrl:'/home'}))
   }
 
   return (

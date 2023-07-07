@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import { Icons } from './Icons'
 import CounterLink from './CounterLink'
+import { useSession } from 'next-auth/react'
 
 const ProfileHeader = () => {
+  const { data, status } = useSession()
+  const user = data?.user
+
+  if (status === 'loading') return null
+
+  if (!user) return null
+
   return (
     <section className='flex flex-col'>
       <div className='flex flex-col'>
@@ -20,7 +28,7 @@ const ProfileHeader = () => {
             <div className='w-1/4 min-w-[48px] -mt-[15%] mb-3 h-auto overflow-visible relative'>
               <div className='object-cover object-center w-full h-full border-2 border-black rounded-full'>
                 <img
-                  src='https://pbs.twimg.com/profile_images/1513035935918825473/mep3G3sy_200x200.jpg'
+                  src={user.image}
                   alt=''
                   className='object-cover object-center w-full h-full rounded-full'
                 />
@@ -32,10 +40,10 @@ const ProfileHeader = () => {
           </div>
           <div className='flex flex-col gap-1 mt-1 mb-3 shrink'>
             <h2 className='text-[#e7e9ea] whitespace-nowrap font-extrabold text-xl leading-6'>
-              Kura
+              {user.name}
             </h2>
             <h3 className='text-[#71767b] whitespace-nowrap font-normal text-[15px] leading-5'>
-              @Kuraxl_
+              @{user.username}
             </h3>
           </div>
           <div className='leading-4 font-normal text-[15px] flex items-center gap-1 justify-start text-[#71767b] mb-3'>
