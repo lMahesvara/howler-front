@@ -11,8 +11,6 @@ const LittleUser = () => {
 
   if (!user) return null
 
-  console.log(user)
-
   return (
     <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full w-full'>
       <div className='flex flex-col w-full max-w-full'>

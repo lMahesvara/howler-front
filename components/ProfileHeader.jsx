@@ -10,14 +10,20 @@ const ProfileHeader = () => {
   if (status === 'loading') return null
 
   if (!user) return null
-
+  
+  const joinedDate = new Date(user.createdAt)
+  const formattedDate = joinedDate.toLocaleDateString('es-ES', {
+    month: 'long',
+    year: 'numeric'
+  })
+  console.log(user)
   return (
     <section className='flex flex-col'>
       <div className='flex flex-col'>
         {/* banner */}
         <div className='w-full h-full overflow-hidden max-h-[200px]'>
           <img
-            src='https://res.cloudinary.com/dq6bsxacw/image/upload/v1688594594/howler/wqhnd7pmxlxbzbizaskw.jpg'
+            src={user.banner}
             alt=''
             className='object-cover object-center w-full h-full'
           />
@@ -26,7 +32,7 @@ const ProfileHeader = () => {
         <div className='flex flex-col px-4 pt-3 mb-4'>
           <div className='flex flex-wrap items-start justify-between'>
             <div className='w-1/4 min-w-[48px] -mt-[15%] mb-3 h-auto overflow-visible relative'>
-              <div className='object-cover object-center w-full h-full border-2 border-black rounded-full'>
+              <div className='object-cover object-center w-[150px] h-[150px] border-2 border-black rounded-full'>
                 <img
                   src={user.image}
                   alt=''
@@ -49,12 +55,12 @@ const ProfileHeader = () => {
           <div className='leading-4 font-normal text-[15px] flex items-center gap-1 justify-start text-[#71767b] mb-3'>
             <Icons.CalendarDays className='w-5 h-5' />
             <p>
-              Se unió en <time>enero de 2021</time>
+              Se unió en <time>{formattedDate}</time>
             </p>
           </div>
           <div className='flex flex-wrap flex-1 '>
-            <CounterLink href='#' count={294} text={'Siguiendo'} />
-            <CounterLink href='#' count={124} text={'Seguidores'} />
+            <CounterLink href='#' amount={user.following.length} text={'Siguiendo'} />
+            <CounterLink href='#' amount={user.followers.length} text={'Seguidores'} />
           </div>
         </div>
       </div>

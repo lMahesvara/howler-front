@@ -10,18 +10,18 @@ import useSWR from 'swr'
 
 export default function Profile() {
   
-  const { data: session} = useSession() 
+  const { data: session, status} = useSession() 
   const user = session?.user
 
-  const { data } = useSWR('/api/howls/user', () => getHowlsByUser("64a75e916a5f842247e87d87"))
+  const { data } = useSWR('/api/howls/user', () => getHowlsByUser(session.user._id))
 
   useEffect(() => {
     if (data) console.log(data)
   }, [data])
 
-  // if (status === 'loading') return null
-
-  // if (!user) return null
+  if (status === 'loading') return null
+  if (!user) return null
+  const numHowls = data ? data.length : 0;
 
   return (
     <>
@@ -33,13 +33,13 @@ export default function Profile() {
               {user.name}
             </PageLayout.HeaderTitle>
             <h3 className='text-[#71767b] whitespace-nowrap font-normal text-[13px] leading-4'>
-              {data.length} Howls
+              {numHowls} Howls
             </h3>
           </div>
         </PageLayout.Header>
         <ProfileHeader />
         <section className='w-full'>
-        {data?.reverse().map((howl, index) => (
+        {data?.map((howl, index) => (
           <Post key={index} idHowl={howl._id} />
         ))}
       </section>
