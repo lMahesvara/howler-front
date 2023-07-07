@@ -113,9 +113,13 @@ export const rehowl = async (idHowl, idUser) => {
         body: JSON.stringify({ idUser }),
       })
     ).json()
-    
-export const login = async userObject =>{
-  try {    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const login = async userObject => {
+  try {
     let response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -128,9 +132,7 @@ export const login = async userObject =>{
     // console.log(data)
 
     return data
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 }
 
 export const loginGoogle = async userObject => {
