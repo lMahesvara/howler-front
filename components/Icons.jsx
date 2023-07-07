@@ -9,6 +9,7 @@ import {
   Home,
   Bell,
   BellDot,
+  Search,
   Mail,
   User2,
   FileImage,
@@ -29,4 +30,6 @@ export const Icons = {
   CalendarDays: CalendarDays,
   FileImage: FileImage,
   Lock: Lock
+  Search: Search
+  FileImage: FileImage
 }
