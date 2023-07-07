@@ -16,6 +16,14 @@ export const getUser = async id => {
   }
 }
 
+export const getHowlsByUser = async id =>{
+  try {
+    return await (await fetch(`${API_URL}/howls/user/${id}`)).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const postUser = async userObject => {
   try {
     return await (
