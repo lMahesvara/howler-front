@@ -2,7 +2,8 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Toaster } from '@/components/Toaster'
 import Session from '@/components/Session'
-
+import PageLayout from '@/components/PageLayout'
+import ModalInteracciones from '@/components/Interacciones'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
