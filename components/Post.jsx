@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Icons } from './Icons'
 import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
@@ -9,8 +9,7 @@ import { useHowl } from '@/hooks/useHowl'
 import { getShortTime } from '@/lib/utils'
 import { usePostCounters } from '@/hooks/usePostCounters'
 
-const id = '60f9b0b3e6b6a30015a4b0b5'
-const Post = ({ idHowl }) => {
+const Post = ({ idHowl, id }) => {
   const router = useRouter()
 
   const { howl, isLoading: isLoadingHowl } = useHowl(idHowl)
@@ -19,8 +18,19 @@ const Post = ({ idHowl }) => {
 
   const { user: userData = {}, isLoading: isLoadingUser } = useUser(user ?? '')
 
-  const { like, likesCount, rehowlsCount, handleLike, handleRehowl } =
-    usePostCounters({ likes, id, idHowl: howl?._id, rehowls })
+  const {
+    like,
+    rehowl,
+    likesCount,
+    rehowlsCount,
+    handleLike,
+    handleRehowl,
+    reloadData,
+  } = usePostCounters({ likes, id, idHowl: howl?._id, rehowls })
+
+  useEffect(() => {
+    reloadData()
+  }, [isLoadingHowl, howl, id])
 
   if (isLoadingUser || isLoadingHowl) return null
 
@@ -139,7 +149,8 @@ const Post = ({ idHowl }) => {
                 title={'Rehowl'}
                 bgColorHover='hover:bg-[#00ba7c1a]'
                 textColorHover='hover:text-[#00b87a]'
-                textColor={'text-[#71767b]'}
+                textColor={rehowl ? 'text-[#00b87a]' : 'text-[#71767b]'}
+                onClick={handleRehowl}
               >
                 <Icons.Repeat2 className='w-5 h-5 text-inherit' />
                 <span className='text-[13px] leading-4 '>{rehowlsCount}</span>
@@ -152,7 +163,7 @@ const Post = ({ idHowl }) => {
                 onClick={handleLike}
               >
                 <Icons.Heart
-                  className={`w-6 h-6 text-inherit ${
+                  className={`w-5 h-5 text-inherit ${
                     like ? 'fill-current' : ''
                   }`}
                 />

@@ -5,14 +5,25 @@ import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
 import { getFullTime } from '@/lib/utils'
 import { usePostCounters } from '@/hooks/usePostCounters'
+import { useEffect } from 'react'
 
-const id = '60f9b0b3e6b6a30015a4b0b5'
-const ExtendedPost = ({ howl }) => {
+const ExtendedPost = ({ howl, id }) => {
   const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
   const { user: userData, isLoading } = useUser(user)
 
-  const { like, likesCount, rehowlsCount, handleLike, handleRehowl } =
-    usePostCounters({ likes, id, idHowl: howl._id, rehowls })
+  const {
+    like,
+    rehowl,
+    likesCount,
+    rehowlsCount,
+    handleLike,
+    handleRehowl,
+    reloadData,
+  } = usePostCounters({ likes, id, idHowl: howl._id, rehowls })
+
+  useEffect(() => {
+    reloadData()
+  }, [id, howl])
 
   if (isLoading) return null
 
@@ -20,22 +31,7 @@ const ExtendedPost = ({ howl }) => {
     <article className='relative flex w-full max-w-full px-4 overflow-hidden bg-black shrink '>
       <div className='flex flex-col max-w-full shrink grow'>
         {/* Actions */}
-        <div className='pt-3 basis-0 grow'>
-          {/* Rehowled */}
-          <div className='flex mb-1 -m-1'>
-            <div className='flex items-center justify-end mr-3 basis-10 grow-0'>
-              <Icons.Repeat2 className='w-4 h-4 text-[#71767b]' />
-            </div>
-            <div className='flex items-center justify-start basis-0 grow shrink'>
-              <Link
-                href={`/${userData.username}`}
-                className='text-[13px] font-semibold cursor-pointer hover:underline text-[#71767b] leading-4 whitespace-nowrap overflow-ellipsis overflow-hidden'
-              >
-                You Rehowled
-              </Link>
-            </div>
-          </div>
-        </div>
+        <div className='pt-3 basis-0 grow'></div>
         {/* Content */}
         <div className='flex gap-3'>
           <Link className='w-10 h-10' href={`/${userData.username}`}>
@@ -103,7 +99,8 @@ const ExtendedPost = ({ howl }) => {
             title={'Rehowl'}
             bgColorHover='hover:bg-[#00ba7c1a]'
             textColorHover='hover:text-[#00b87a]'
-            textColor={'text-[#71767b]'}
+            textColor={rehowl ? 'text-[#00b87a]' : 'text-[#71767b]'}
+            onClick={handleRehowl}
           >
             <Icons.Repeat2 className='w-6 h-6 text-inherit' />
           </RoundedButtonLayout>

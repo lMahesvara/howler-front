@@ -12,9 +12,9 @@ const LittleUser = () => {
   if (!user) return null
 
   return (
-    <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full w-full'>
-      <div className='flex flex-col w-full max-w-full'>
-        <div className='flex flex-row justify-start'>
+    <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full xl:w-full'>
+      <div className='flex flex-col items-center w-full max-w-full xl:items-start'>
+        <div className='flex flex-row justify-center w-full xl:justify-start'>
           <div className='xl:mr-3'>
             <div className='w-10 h-10'>
               <img
