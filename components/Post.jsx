@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Icons } from './Icons'
 import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
@@ -19,8 +19,18 @@ const Post = ({ idHowl }) => {
 
   const { user: userData = {}, isLoading: isLoadingUser } = useUser(user ?? '')
 
-  const { like, likesCount, rehowlsCount, handleLike, handleRehowl } =
-    usePostCounters({ likes, id, idHowl: howl?._id, rehowls })
+  const {
+    like,
+    likesCount,
+    rehowlsCount,
+    handleLike,
+    handleRehowl,
+    reloadData,
+  } = usePostCounters({ likes, id, idHowl: howl?._id, rehowls })
+
+  useEffect(() => {
+    reloadData()
+  }, [isLoadingHowl])
 
   if (isLoadingUser || isLoadingHowl) return null
 

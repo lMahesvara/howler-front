@@ -7,6 +7,12 @@ export const usePostCounters = ({ likes = [], id, idHowl, rehowls = [] }) => {
   const [likesCount, setLikesCount] = useState(likes.length)
   const [rehowlsCount, setRehowlsCount] = useState(rehowls.length)
 
+  const reloadData = async () => {
+    setLike(likes.find(like => like === id) ?? false)
+    setRehowlsCount(rehowls.length)
+    setLikesCount(likes.length)
+  }
+
   const handleLike = async e => {
     e.stopPropagation()
 
@@ -28,5 +34,6 @@ export const usePostCounters = ({ likes = [], id, idHowl, rehowls = [] }) => {
     rehowlsCount,
     handleLike,
     handleRehowl,
+    reloadData,
   }
 }
