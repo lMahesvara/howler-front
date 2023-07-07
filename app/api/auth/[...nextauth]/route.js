@@ -21,7 +21,6 @@ export const authOptions = {
         }
 
         const { user: updatedUser } = await login(user)
-        console.log(updatedUser)
         return updatedUser
       },
     }),
@@ -34,7 +33,7 @@ export const authOptions = {
         accessToken: token?.accessToken || '',
         user: {
           ...session.user,
-          ...token.user
+          ...token.user,
         },
       }
     },
