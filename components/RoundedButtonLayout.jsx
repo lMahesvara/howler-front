@@ -6,10 +6,13 @@ const RoundedButtonLayout = ({
   textColorHover = '',
   bgColorHover = '',
   title,
+  onClick,
 }) => {
   return (
     <button
       className={`relative bg-transparent max-w-min flex items-center gap-1 ${textColorHover} ${textColor}`}
+      onClick={onClick}
+      type='button'
     >
       <span className='sr-only'>{title}</span>
       <div

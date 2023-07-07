@@ -2,8 +2,13 @@ import React from 'react'
 
 const PageLayout = React.forwardRef(({ children }, ref) => {
   return (
-    <div ref={ref} className='relative grow shrink'>
-      {children}
+    <div
+      ref={ref}
+      className='relative w-full grow shrink md:grow-[2] md:w-auto lg:grow flex'
+    >
+      <div className='w-full grow shrink md:max-w-[600px] lg:max-w-[990px]'>
+        {children}
+      </div>
     </div>
   )
 })

@@ -7,11 +7,11 @@ const ProfileHeader = () => {
     <section className='flex flex-col'>
       <div className='flex flex-col'>
         {/* banner */}
-        <div className='w-full h-full overflow-hidden '>
+        <div className='w-full h-full overflow-hidden max-h-[200px]'>
           <img
-            src='https://pbs.twimg.com/profile_banners/1353744322886295553/1687151062/1080x360'
+            src='https://res.cloudinary.com/dq6bsxacw/image/upload/v1688594594/howler/wqhnd7pmxlxbzbizaskw.jpg'
             alt=''
-            className='object-cover object-center w-full h-full '
+            className='object-cover object-center w-full h-full'
           />
         </div>
         {/* info */}
