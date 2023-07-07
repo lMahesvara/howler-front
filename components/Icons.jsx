@@ -8,10 +8,12 @@ import {
   Home,
   Bell,
   BellDot,
+  Search,
   Mail,
   User2,
   FileImage,
   X,
+  Lock
 } from 'lucide-react'
 
 export const Icons = {
@@ -28,4 +30,7 @@ export const Icons = {
   CalendarDays: CalendarDays,
   FileImage: FileImage,
   Close: X,
+  Lock: Lock
+  Search: Search
+  FileImage: FileImage
 }
