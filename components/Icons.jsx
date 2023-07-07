@@ -12,7 +12,8 @@ import {
   Search,
   Mail,
   User2,
-  FileImage
+  FileImage,
+  Lock
 } from 'lucide-react'
 
 export const Icons = {
@@ -27,6 +28,8 @@ export const Icons = {
   MoreHorizontal: MoreHorizontal,
   ArrowLeft: ArrowLeft,
   CalendarDays: CalendarDays,
+  FileImage: FileImage,
+  Lock: Lock
   Search: Search
   FileImage: FileImage
 }

@@ -1,13 +1,17 @@
+'use client'
 import BackButton from '@/components/BackButton'
 import ExtendedPost from '@/components/ExtendedPost'
 import ListOfComments from '@/components/ListOfComments'
 import PageLayout from '@/components/PageLayout'
 import Reply from '@/components/Reply'
+import { useHowl } from '@/hooks/useHowl'
 
-const page = ({ params }) => {
-  const { username, howlId } = params
+const Page = ({ params }) => {
+  const { idHowl } = params
+  const { howl, isLoading } = useHowl(idHowl)
 
-  console.log(username, howlId)
+  if (isLoading) return null
+
   return (
     <PageLayout.Container>
       <PageLayout.Header>
@@ -18,11 +22,11 @@ const page = ({ params }) => {
           </PageLayout.HeaderTitle>
         </div>
       </PageLayout.Header>
-      <ExtendedPost />
+      <ExtendedPost howl={howl} />
       <Reply />
-      <ListOfComments />
+      <ListOfComments replies={howl.replies} />
     </PageLayout.Container>
   )
 }
 
-export default page
+export default Page

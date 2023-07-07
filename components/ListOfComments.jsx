@@ -1,13 +1,14 @@
+'use client'
 import React from 'react'
 import Post from './Post'
+import { useHowl } from '@/hooks/useHowl'
 
-const ListOfComments = () => {
+const ListOfComments = ({ replies }) => {
   return (
     <section className='w-full'>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {replies.map(reply => (
+        <Post key={reply} idHowl={reply} />
+      ))}
     </section>
   )
 }
