@@ -5,12 +5,8 @@ import RoundedButtonLayout from './RoundedButtonLayout'
 import { useSWRConfig } from 'swr'
 import { getSignature } from '@/app/_actions'
 import { postHowl, replyHowl } from '@/services/api'
-import { useSession } from 'next-auth/react'
 
-const CreatePost = ({ idHowl, label }) => {
-  const { data, status } = useSession()
-  const user = data?.user
-
+const CreatePost = ({ idHowl, label, status, user }) => {
   const [image, setImage] = useState(null)
   const [text, setText] = useState('')
   const imageRef = useRef(null)
