@@ -102,7 +102,7 @@ export const unlikeHowl = async (idHowl, idUser) => {
   }
 }
 
-export const rehowl = async (idHowl, idUser) => {
+export const rehowlHowl = async (idHowl, idUser) => {
   try {
     return await (
       await fetch(`${API_URL}/howls/rehowl/${idHowl}`, {

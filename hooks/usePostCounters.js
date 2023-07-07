@@ -37,7 +37,6 @@ export const usePostCounters = ({ likes = [], id, idHowl, rehowls = [] }) => {
     setRehowlsCount(rehowls)
     setRehowl(!rehowl)
 
-    console.log(rehowls)
   }
 
   return {

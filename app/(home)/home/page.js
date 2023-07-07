@@ -5,13 +5,18 @@ import PageLayout from '@/components/PageLayout'
 import Post from '@/components/Post'
 import { getHome } from '@/services/api'
 import useSWR from 'swr'
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR('/api/howls', () => getHome())
-
-  useEffect(() => {
-    if (data) console.log(data)
-  }, [data])
+  const { data, status } = useSession()
+  const user = data?.user
+  const {
+    data: dataHowl,
+    error,
+    isLoading,
+  } = useSWR('/api/howls', () => getHome(), {
+    refreshInterval: 1000,
+  })
 
   if (isLoading) return <div>Loading...</div>
 
@@ -25,10 +30,10 @@ export default function Home() {
           </PageLayout.HeaderTitle>
         </div>
       </PageLayout.Header>
-      <CreatePost label={'What is happening?!'} />
+      <CreatePost label={'What is happening?!'} status={status} user={user} />
       <section className='w-full'>
-        {data?.map((howl, index) => (
-          <Post key={index} idHowl={howl._id} />
+        {dataHowl?.map((howl, index) => (
+          <Post key={index} idHowl={howl._id} id={user?._id} />
         ))}
       </section>
     </PageLayout.Container>
