@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import StepComponent from './StepComponent'
 import ModalLogin from './ModalLogin'
+import {signIn} from 'next-auth/react'
 
 const RegisterForm = () => {
 
@@ -32,7 +33,8 @@ const RegisterForm = () => {
 
         <button
           className='w-full h-12 px-6 transition duration-300 bg-white rounded-md group hover:bg-gray-700 hover:text-white'
-          // onClick={() => signIn('google')}
+          type='button'
+          onClick={() => signIn('google')}
         >
           <div className='flex flex-row items-center justify-center space-x-4'>
             <span className='text-sm font-semibold tracking-wide text-black transition duration-300 w-max group-hover:text-white sm:text-base'>

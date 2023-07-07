@@ -2,9 +2,13 @@
 import React from 'react'
 import RegisterForm  from '../../components/RegisterForm'
 import LoginForm from '../../components/LoginForm'
-import StepComponent from '@/components/StepComponent'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
 
-const page = () => {
+const Page = () => {
+  const {data, status} = useSession()
+  console.log(data, status)
+
   return (
     <div className='grow shrink'>
       <main className='flex flex-col-reverse w-screen h-screen min-h-screen overflow-x-hidden md:flex-row md:items-center grow shrink xl:overflow-hidden'>
@@ -22,4 +26,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
