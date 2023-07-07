@@ -1,7 +1,5 @@
-import Navbar from '@/components/Navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import PageLayout from '@/components/PageLayout'
 import { Toaster } from '@/components/Toaster'
 import Session from '@/components/Session'
 

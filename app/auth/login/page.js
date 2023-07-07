@@ -3,7 +3,6 @@ import React from 'react'
 import RegisterForm from '../../../components/RegisterForm'
 import LoginForm from '../../../components/LoginForm'
 import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
 
 const Page = () => {
   const { data, status } = useSession()

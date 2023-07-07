@@ -1,10 +1,11 @@
 import Navbar from '@/components/Navbar'
+import PageLayout from '@/components/PageLayout'
 
 const layout = ({ children }) => {
   return (
     <>
       <Navbar />
-      {children}
+      <PageLayout>{children}</PageLayout>
     </>
   )
 }

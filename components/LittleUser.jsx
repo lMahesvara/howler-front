@@ -4,10 +4,8 @@ import React from 'react'
 import { useSession } from 'next-auth/react'
 
 const LittleUser = () => {
-  const {
-    data: { user },
-    status,
-  } = useSession()
+  const { data, status } = useSession()
+  const user = data?.user
 
   if (status === 'loading') return null
 
@@ -16,8 +14,8 @@ const LittleUser = () => {
   console.log(user)
 
   return (
-    <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full'>
-      <div className='flex flex-col max-w-full'>
+    <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full w-full'>
+      <div className='flex flex-col w-full max-w-full'>
         <div className='flex flex-row justify-start'>
           <div className='xl:mr-3'>
             <div className='w-10 h-10'>

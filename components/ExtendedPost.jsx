@@ -4,30 +4,15 @@ import CounterLink from './CounterLink'
 import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
 import { getFullTime } from '@/lib/utils'
-import { likeHowl, unlikeHowl } from '@/services/api'
-import { useState } from 'react'
+import { usePostCounters } from '@/hooks/usePostCounters'
 
 const id = '60f9b0b3e6b6a30015a4b0b5'
 const ExtendedPost = ({ howl }) => {
   const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
   const { user: userData, isLoading } = useUser(user)
 
-  const [like, setLike] = useState(likes.find(like => like === id) ?? false)
-  const [likesCount, setLikesCount] = useState(likes.length)
-  const [rehowlsCount, setRehowlsCount] = useState(rehowls.length)
-
-  const handleLike = async () => {
-    if (like) {
-      const { likes } = await unlikeHowl(howl._id, id)
-      setLikesCount(likes)
-    } else {
-      const { likes } = await likeHowl(howl._id, id)
-      setLikesCount(likes)
-    }
-    setLike(!like)
-  }
-
-  const handleRehowl = async () => {}
+  const { like, likesCount, rehowlsCount, handleLike, handleRehowl } =
+    usePostCounters({ likes, id, idHowl: howl._id, rehowls })
 
   if (isLoading) return null
 

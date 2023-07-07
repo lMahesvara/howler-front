@@ -7,7 +7,9 @@ import { useUser } from '@/hooks/useUser'
 import { useRouter } from 'next/navigation'
 import { useHowl } from '@/hooks/useHowl'
 import { getShortTime } from '@/lib/utils'
+import { usePostCounters } from '@/hooks/usePostCounters'
 
+const id = '60f9b0b3e6b6a30015a4b0b5'
 const Post = ({ idHowl }) => {
   const router = useRouter()
 
@@ -16,6 +18,9 @@ const Post = ({ idHowl }) => {
   const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
 
   const { user: userData = {}, isLoading: isLoadingUser } = useUser(user ?? '')
+
+  const { like, likesCount, rehowlsCount, handleLike, handleRehowl } =
+    usePostCounters({ likes, id, idHowl: howl?._id, rehowls })
 
   if (isLoadingUser || isLoadingHowl) return null
 
@@ -137,20 +142,22 @@ const Post = ({ idHowl }) => {
                 textColor={'text-[#71767b]'}
               >
                 <Icons.Repeat2 className='w-5 h-5 text-inherit' />
-                <span className='text-[13px] leading-4 '>
-                  {rehowls?.length ?? 0}
-                </span>
+                <span className='text-[13px] leading-4 '>{rehowlsCount}</span>
               </RoundedButtonLayout>
               <RoundedButtonLayout
                 title={'Like'}
                 bgColorHover='hover:bg-[#f918801a]'
                 textColorHover='hover:text-[#f91880]'
-                textColor={'text-[#71767b]'}
+                textColor={like ? 'text-[#f91880]' : 'text-[#71767b]'}
+                onClick={handleLike}
               >
-                <Icons.Heart className='w-5 h-5 text-inherit' />
-                <span className='text-[13px] leading-4 '>
-                  {likes?.length ?? 0}
-                </span>
+                <Icons.Heart
+                  className={`w-6 h-6 text-inherit ${
+                    like ? 'fill-current' : ''
+                  }`}
+                />
+
+                <span className='text-[13px] leading-4 '>{likesCount}</span>
               </RoundedButtonLayout>
             </div>
           </div>

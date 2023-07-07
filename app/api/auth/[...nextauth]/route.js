@@ -25,6 +25,9 @@ export const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: '/auth/login',
+  },
   callbacks: {
     session: async ({ session, token, user }) => {
       //console.log(session, token, user)

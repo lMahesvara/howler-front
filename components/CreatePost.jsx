@@ -5,8 +5,12 @@ import RoundedButtonLayout from './RoundedButtonLayout'
 import { useSWRConfig } from 'swr'
 import { getSignature } from '@/app/_actions'
 import { postHowl, replyHowl } from '@/services/api'
+import { useSession } from 'next-auth/react'
 
 const CreatePost = ({ idHowl, label }) => {
+  const { data, status } = useSession()
+  const user = data?.user
+
   const [image, setImage] = useState(null)
   const [text, setText] = useState('')
   const imageRef = useRef(null)
@@ -51,7 +55,7 @@ const CreatePost = ({ idHowl, label }) => {
       const howl = {
         text,
         image: imageURL,
-        user: '64920cb4572ffa821388db04',
+        user: user._id,
       }
 
       await replyHowl(idHowl, howl).then(res => {
@@ -63,7 +67,7 @@ const CreatePost = ({ idHowl, label }) => {
       const howl = {
         text,
         image: imageURL,
-        user: '64910ab4390610b3c48d9bac',
+        user: user._id,
       }
 
       await postHowl(howl).then(res => {
@@ -76,14 +80,18 @@ const CreatePost = ({ idHowl, label }) => {
     imageRef.current.value = ''
   }
 
+  if (status === 'loading') return null
+
+  if (status === 'unauthenticated') return <></>
+
   return (
     <article className='relative w-full p-4 overflow-hidden bg-black border-y border-[#2f3336] flex max-w-full shrink pt-6'>
       <div className='flex flex-row max-w-full shrink grow basis-auto'>
         <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
           <div className='w-10 h-10'>
             <img
-              src='https://res.cloudinary.com/dq6bsxacw/image/upload/v1688607947/7309681_yzfrpy.jpg'
-              alt=''
+              src={user?.image}
+              alt='user'
               className='w-full h-full transition-opacity duration-200 rounded-full cursor-pointer hover:opacity-80'
             />
           </div>
