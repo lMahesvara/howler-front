@@ -6,9 +6,9 @@ import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
 import { useRouter } from 'next/navigation'
 import { useHowl } from '@/hooks/useHowl'
+import { getShortTime } from '@/lib/utils'
 
 const Post = ({ idHowl }) => {
-  console.log('idHowl', idHowl)
   const router = useRouter()
 
   const { howl, isLoading: isLoadingHowl } = useHowl(idHowl)
@@ -45,9 +45,15 @@ const Post = ({ idHowl }) => {
         {/* Content */}
         <div className='flex flex-row max-w-full shrink grow basis-auto'>
           <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
-            <Link className='w-10 h-10' href={`/${userData?.username}`}>
+            <Link
+              className='w-10 h-10'
+              href={`/${userData?.username}`}
+              onClick={e => {
+                e.stopPropagation()
+              }}
+            >
               <img
-                src='https://picsum.photos/200/200'
+                src={userData?.image}
                 alt=''
                 className='w-full h-full transition-opacity duration-200 rounded-full hover:opacity-80'
               />
@@ -60,13 +66,19 @@ const Post = ({ idHowl }) => {
               <div className='flex flex-row max-w-full shrink grow'>
                 <Link
                   className='text-[15px] font-bold shrink text-[#e7e9ea] hover:underline leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden '
-                  href={`/${userData.username}`}
+                  href={`/${userData?.username}`}
+                  onClick={e => {
+                    e.stopPropagation()
+                  }}
                 >
                   {userData?.name ?? 'User'}
                 </Link>
                 <Link
                   className='text-[15px] font-normal shrink text-[#71767b] leading-5 ml-1 whitespace-nowrap overflow-ellipsis overflow-hidden'
-                  href={`/${userData.username}`}
+                  href={`/${userData?.username}`}
+                  onClick={e => {
+                    e.stopPropagation()
+                  }}
                 >
                   @{userData?.username ?? 'user'}
                 </Link>
@@ -77,7 +89,7 @@ const Post = ({ idHowl }) => {
                   className='text-[15px] font-normal shrink text-[#71767b] leading-5 hover:underline whitespace-nowrap'
                   href='#'
                 >
-                  Mar 18
+                  {getShortTime(new Date(date))}
                 </Link>
               </div>
               <button className='relative ml-5 bg-transparent max-w-min shrink grow basis-auto hover:text-[#1d9bf0] text-[#71767b]'>

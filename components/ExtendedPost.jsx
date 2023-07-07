@@ -3,11 +3,31 @@ import { Icons } from './Icons'
 import CounterLink from './CounterLink'
 import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
+import { getFullTime } from '@/lib/utils'
+import { likeHowl, unlikeHowl } from '@/services/api'
+import { useState } from 'react'
 
+const id = '60f9b0b3e6b6a30015a4b0b5'
 const ExtendedPost = ({ howl }) => {
   const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
-
   const { user: userData, isLoading } = useUser(user)
+
+  const [like, setLike] = useState(likes.find(like => like === id) ?? false)
+  const [likesCount, setLikesCount] = useState(likes.length)
+  const [rehowlsCount, setRehowlsCount] = useState(rehowls.length)
+
+  const handleLike = async () => {
+    if (like) {
+      const { likes } = await unlikeHowl(howl._id, id)
+      setLikesCount(likes)
+    } else {
+      const { likes } = await likeHowl(howl._id, id)
+      setLikesCount(likes)
+    }
+    setLike(!like)
+  }
+
+  const handleRehowl = async () => {}
 
   if (isLoading) return null
 
@@ -33,13 +53,13 @@ const ExtendedPost = ({ howl }) => {
         </div>
         {/* Content */}
         <div className='flex gap-3'>
-          <div className='w-10 h-10 cursor-pointer'>
+          <Link className='w-10 h-10' href={`/${userData.username}`}>
             <img
-              src='https://pbs.twimg.com/profile_images/1613612257015128065/oA0Is67J_normal.jpg'
+              src={userData?.image}
               alt=''
               className='w-full h-full transition-opacity duration-200 rounded-full '
             />
-          </div>
+          </Link>
           <div className='flex flex-col max-w-full shrink grow'>
             <Link
               className='text-[15px] font-bold shrink text-[#e7e9ea] hover:underline leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden w-min'
@@ -59,19 +79,21 @@ const ExtendedPost = ({ howl }) => {
         <p className='text-[rgb(231,233,234)] font-normal text-[17px] leading-6- relative whitespace-pre-wrap mt-3'>
           {text}
         </p>
-        <div className='mt-3 rounded-2xl border border-[#2f3336] overflow-hidden w-full h-full grow'>
-          <img
-            src='https://pbs.twimg.com/media/FztG-_lXoAAWpCc?format=jpg&name=small'
-            alt=''
-            className='object-cover w-full h-full cursor-pointer rounded-2xl'
-          />
-        </div>
+        {image && (
+          <div className='mt-3 rounded-2xl border border-[#2f3336] overflow-hidden w-full h-full grow'>
+            <img
+              src={image}
+              alt=''
+              className='object-cover w-full h-full cursor-pointer rounded-2xl'
+            />
+          </div>
+        )}
         <div className='my-3'>
           <Link
             className='text-[15px] font-normal shrink text-[#71767b] leading-5 hover:underline whitespace-nowrap'
             href='#'
           >
-            4:02 a. m. · 28 jun. 2023
+            {getFullTime(new Date(date))}
           </Link>
         </div>
         <div className='flex flex-wrap gap-5 border-y border-[#2f3336] py-4 justify-evenly'>
@@ -80,16 +102,8 @@ const ExtendedPost = ({ howl }) => {
             amount={replies.length ?? 0}
             text={'Comentarios'}
           />
-          <CounterLink
-            href={'#'}
-            amount={rehowls.length ?? 0}
-            text={'Rehowls'}
-          />
-          <CounterLink
-            href={'#'}
-            amount={replies.length ?? 0}
-            text={'Me gusta'}
-          />
+          <CounterLink href={'#'} amount={rehowlsCount} text={'Rehowls'} />
+          <CounterLink href={'#'} amount={likesCount} text={'Me gusta'} />
         </div>
         <div className='flex flex-wrap gap-5 justify-around border-b py-3 border-[#2f3336]'>
           <RoundedButtonLayout
@@ -112,9 +126,12 @@ const ExtendedPost = ({ howl }) => {
             title={'Like'}
             bgColorHover='hover:bg-[#f918801a]'
             textColorHover='hover:text-[#f91880]'
-            textColor={'text-[#71767b]'}
+            textColor={like ? 'text-[#f91880]' : 'text-[#71767b]'}
+            onClick={handleLike}
           >
-            <Icons.Heart className='w-6 h-6 text-inherit' />
+            <Icons.Heart
+              className={`w-6 h-6 text-inherit ${like ? 'fill-current' : ''}`}
+            />
           </RoundedButtonLayout>
         </div>
       </div>

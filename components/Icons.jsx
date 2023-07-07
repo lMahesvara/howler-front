@@ -1,4 +1,3 @@
-
 import {
   MessageCircle,
   Heart,
@@ -13,6 +12,7 @@ import {
   Mail,
   User2,
   FileImage,
+  X,
   Lock
 } from 'lucide-react'
 
@@ -29,6 +29,7 @@ export const Icons = {
   ArrowLeft: ArrowLeft,
   CalendarDays: CalendarDays,
   FileImage: FileImage,
+  Close: X,
   Lock: Lock
   Search: Search
   FileImage: FileImage
