@@ -1,4 +1,3 @@
-
 import {
   MessageCircle,
   Heart,
@@ -11,7 +10,8 @@ import {
   BellDot,
   Mail,
   User2,
-  FileImage
+  FileImage,
+  X,
 } from 'lucide-react'
 
 export const Icons = {
@@ -26,5 +26,6 @@ export const Icons = {
   MoreHorizontal: MoreHorizontal,
   ArrowLeft: ArrowLeft,
   CalendarDays: CalendarDays,
-  FileImage: FileImage
+  FileImage: FileImage,
+  Close: X,
 }
