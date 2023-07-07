@@ -1,9 +1,9 @@
 'use client'
 import BackButton from '@/components/BackButton'
+import CreatePost from '@/components/CreatePost'
 import ExtendedPost from '@/components/ExtendedPost'
 import ListOfComments from '@/components/ListOfComments'
 import PageLayout from '@/components/PageLayout'
-import Reply from '@/components/Reply'
 import { useHowl } from '@/hooks/useHowl'
 
 const Page = ({ params }) => {
@@ -23,7 +23,7 @@ const Page = ({ params }) => {
         </div>
       </PageLayout.Header>
       <ExtendedPost howl={howl} />
-      <Reply />
+      <CreatePost idHowl={idHowl} label={'Howl your reply!'} />
       <ListOfComments replies={howl.replies} />
     </PageLayout.Container>
   )

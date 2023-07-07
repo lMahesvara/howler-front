@@ -20,10 +20,6 @@ export default function Profile() {
           </div>
         </PageLayout.Header>
         <ProfileHeader />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
       </PageLayout.Container>
     </>
   )

@@ -25,7 +25,7 @@ export default function Home() {
           </PageLayout.HeaderTitle>
         </div>
       </PageLayout.Header>
-      <CreatePost />
+      <CreatePost label={'What is happening?!'} />
       <section className='w-full'>
         {data?.map((howl, index) => (
           <Post key={index} idHowl={howl._id} />
