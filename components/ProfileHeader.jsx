@@ -45,7 +45,7 @@ const ProfileHeader = ({ user, openModal }) => {
                 </button>
                 <button
                   className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#eff3f41a]'
-                  onClick={() => signOut({ callbackUrl: '/auth/login' })}
+                  onClick={() => signOut({ callbackUrl: '/login' })}
                 >
                   Log Out
                 </button>
