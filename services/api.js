@@ -152,7 +152,6 @@ export const login = async userObject => {
 }
 
 export const loginGoogle = async userObject => {
-  console.log(userObject)
   try {
     let response = await fetch({
       url: `${API_URL}/auth/login/external`,

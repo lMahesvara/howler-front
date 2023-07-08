@@ -29,42 +29,46 @@ export const authOptions = {
     signIn: '/auth/login',
   },
   callbacks: {
-    session: async ({ session, token, user }) => {
-      console.log(session, token, user)
-      return {
-        ...session,
-        accessToken: token?.accessToken || '',
-        user: {
-          ...session.user,
-          ...token.user,
-        },
+    session: async ({ session, token }) => {
+      if (token?.provider === 'credentials') {
+        return {
+          ...session,
+          accessToken: token?.accessToken || '',
+          user: {
+            ...session.user,
+            ...token.user,
+          },
+        }
+      } else {
+        const userToAuth = {
+          id: token?.providerAccountId,
+          name: token?.profile?.given_name,
+          email: session?.user?.email,
+          image: token?.user?.image,
+        }
+        const { user: updatedUser } = await loginGoogle(userToAuth)
+        return {
+          ...session,
+          accessToken: token?.accessToken || '',
+          user: {
+            ...session.user,
+            ...updatedUser,
+          },
+        }
       }
     },
-    // session: async ({ session, token}) => {
-
-    //   const user = {
-    //     id: token.id,
-    //     ...session.user,
-    //   }
-    //   const {user: updatedUser} = await loginGoogle(user)
-    //   return {
-    //     ...session,
-    //     accessToken: token?.accessToken || '',
-    //     user: {
-    //       ...session.user,
-    //       ...updatedUser,
-    //     },
-    //   }
-    // },
-    jwt: ({ token, user }) => {
+    jwt: ({ token, user, account, profile }) => {
       if (user) {
         const u = user
-        console.log('macana', u)
+
         return {
           ...token,
           user: u,
           id: u.id,
           randomKey: u.randomKey,
+          provider: account.provider,
+          providerAccountId: account.providerAccountId,
+          profile,
         }
       }
       return token

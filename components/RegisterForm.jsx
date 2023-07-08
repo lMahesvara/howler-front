@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import StepComponent from './StepComponent'
 import ModalLogin from './ModalLogin'
-import {signIn} from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 
 const RegisterForm = () => {
-
   const [showModal, setShowModal] = useState(false)
 
-  const handleOpenModal = () =>{
+  const handleOpenModal = () => {
     setShowModal(true)
   }
 
-  const handleCloseModal = () =>{
+  const handleCloseModal = () => {
     setShowModal(false)
   }
 
@@ -31,7 +30,7 @@ const RegisterForm = () => {
           Sign up
         </button>
 
-        {/* <button
+        <button
           className='w-full h-12 px-6 transition duration-300 bg-white rounded-md group hover:bg-gray-700 hover:text-white'
           type='button'
           onClick={() => signIn('google')}
@@ -46,18 +45,18 @@ const RegisterForm = () => {
               alt='google logo'
             />
           </div>
-        </button> */}
+        </button>
 
         <div>
           <p className='w-full text-xs italic'>
-            By signing up, you agree to the 
+            By signing up, you agree to the
             <a
               className='text-xs italic underline hover:text-blue-600'
               href='#'
             >
-               Terms of Service 
+              Terms of Service
             </a>
-            and 
+            and
             <a
               className='text-xs italic underline hover:text-blue-600'
               href='#'
@@ -74,8 +73,10 @@ const RegisterForm = () => {
           </p>
         </div>
       </div>
-      
-      {showModal && <StepComponent handleCloseModal={() => setShowModal(false)}/>}
+
+      {showModal && (
+        <StepComponent handleCloseModal={() => setShowModal(false)} />
+      )}
     </section>
   )
 }
