@@ -22,9 +22,11 @@ const Navbar = () => {
 
   useEffect(() => {
     if (dataUser) {
+      console.log(dataUser)
       setUser(dataUser)
     }
-  }, [dataUser])
+    if (status === 'unauthenticated') setUser(null)
+  }, [dataUser, status])
 
   if (status === 'loading') return null
   return (
@@ -39,14 +41,12 @@ const Navbar = () => {
           {listMenu.map((item, index) => (
             <NavLinks key={index} {...item} />
           ))}
-          <NavLinks href={`/${user.username}`} name='Profile' icon={<Icons.Profile/>}/>
+          <NavLinks
+            href={`/${user?.username ?? ''}`}
+            name='Profile'
+            icon={<Icons.Profile />}
+          />
         </section>
-
-        {/*   {
-    name: 'Profile',
-    icon: <Icons.Profile />,
-    href: '/username',
-  }, */}
         <LittleUser />
       </div>
     </header>
