@@ -14,6 +14,7 @@ import {
   FileImage,
   X,
   Lock,
+  ImagePlus,
 } from 'lucide-react'
 
 export const Icons = {
@@ -33,4 +34,5 @@ export const Icons = {
   Lock: Lock,
   Search: Search,
   FileImage: FileImage,
+  ImagePlus: ImagePlus,
 }

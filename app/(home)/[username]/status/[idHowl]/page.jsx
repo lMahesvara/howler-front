@@ -5,11 +5,10 @@ import ExtendedPost from '@/components/ExtendedPost'
 import ListOfComments from '@/components/ListOfComments'
 import PageLayout from '@/components/PageLayout'
 import { useHowl } from '@/hooks/useHowl'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/store/authStore'
 
 const Page = ({ params }) => {
-  const { data, status } = useSession()
-  const user = data?.user
+  const { user } = useAuth()
 
   const { idHowl } = params
   const { howl, isLoading } = useHowl(idHowl)
@@ -28,13 +27,8 @@ const Page = ({ params }) => {
         </div>
       </PageLayout.Header>
       <ExtendedPost howl={howl} id={user?._id} />
-      <CreatePost
-        idHowl={idHowl}
-        label={'Howl your reply!'}
-        user={user}
-        status={status}
-      />
-      <ListOfComments replies={howl.replies} />
+      <CreatePost idHowl={idHowl} label={'Howl your reply!'} user={user} />
+      <ListOfComments replies={howl.replies} userLogged={user?._id} />
     </PageLayout.Container>
   )
 }

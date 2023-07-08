@@ -15,8 +15,16 @@ export const getUser = async id => {
     console.log(error)
   }
 }
+export const getUserByUsername = async username => {
+  if (!username) return null
+  try {
+    return await (await fetch(`${API_URL}/users/un/${username}`)).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-export const getHowlsByUser = async id =>{
+export const getHowlsByUser = async id => {
   try {
     return await (await fetch(`${API_URL}/howls/user/${id}`)).json()
   } catch (error) {

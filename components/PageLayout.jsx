@@ -26,11 +26,11 @@ const PageContainer = React.forwardRef(({ children }, ref) => {
 })
 PageContainer.displayName = 'PageMain'
 
-const PageHeader = React.forwardRef(({ children }, ref) => {
+const PageHeader = React.forwardRef(({ children, className }, ref) => {
   return (
     <header
       ref={ref}
-      className='min-h-[53px] sticky top-0 w-full flex items-center justify-start px-4 backdrop-filter backdrop-blur-md bg-[rgba(0,0,0,0.65)] z-30'
+      className={`min-h-[53px] sticky top-0 w-full flex items-center justify-start px-4 backdrop-filter backdrop-blur-md bg-[rgba(0,0,0,0.65)] z-30 ${className}`}
     >
       {children}
     </header>

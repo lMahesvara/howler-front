@@ -19,7 +19,7 @@ const ExtendedPost = ({ howl, id }) => {
     handleLike,
     handleRehowl,
     reloadData,
-  } = usePostCounters({ likes, id, idHowl: howl._id, rehowls })
+  } = usePostCounters({ likes, id, idHowl: howl._id, rehowls, user })
 
   useEffect(() => {
     reloadData()

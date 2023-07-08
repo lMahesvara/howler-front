@@ -1,15 +1,14 @@
 'use client'
 import Link from 'next/link'
 import React from 'react'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@/store/authStore'
 
 const LittleUser = () => {
-  const { data, status } = useSession()
-  const user = data?.user
-
-  if (status === 'loading') return null
+  const { user } = useAuth()
 
   if (!user) return null
+
+  console.log(user)
 
   return (
     <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full xl:w-full'>

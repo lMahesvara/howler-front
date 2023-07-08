@@ -6,7 +6,7 @@ import { useSWRConfig } from 'swr'
 import { getSignature } from '@/app/_actions'
 import { postHowl, replyHowl } from '@/services/api'
 
-const CreatePost = ({ idHowl, label, status, user }) => {
+const CreatePost = ({ idHowl, label, user }) => {
   const [image, setImage] = useState(null)
   const [text, setText] = useState('')
   const imageRef = useRef(null)
@@ -76,9 +76,7 @@ const CreatePost = ({ idHowl, label, status, user }) => {
     imageRef.current.value = ''
   }
 
-  if (status === 'loading') return null
-
-  if (status === 'unauthenticated') return <></>
+  if (!user) return null
 
   return (
     <article className='relative w-full p-4 overflow-hidden bg-black border-y border-[#2f3336] flex max-w-full shrink pt-6'>

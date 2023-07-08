@@ -9,7 +9,7 @@ import { useHowl } from '@/hooks/useHowl'
 import { getShortTime } from '@/lib/utils'
 import { usePostCounters } from '@/hooks/usePostCounters'
 
-const Post = ({ idHowl, id }) => {
+const Post = ({ idHowl, id, userProfile = null }) => {
   const router = useRouter()
 
   const { howl, isLoading: isLoadingHowl } = useHowl(idHowl)
@@ -26,7 +26,7 @@ const Post = ({ idHowl, id }) => {
     handleLike,
     handleRehowl,
     reloadData,
-  } = usePostCounters({ likes, id, idHowl: howl?._id, rehowls })
+  } = usePostCounters({ likes, id, idHowl: howl?._id, rehowls, user })
 
   useEffect(() => {
     reloadData()
@@ -43,19 +43,24 @@ const Post = ({ idHowl, id }) => {
         {/* Actions */}
         <div className='pt-3 basis-0 grow'>
           {/* Rehowled */}
-          {/* <div className='flex mb-1 -m-1'>
-            <div className='flex items-center justify-end mr-3 basis-10 grow-0'>
-              <Icons.Repeat2 className='w-4 h-4 text-[#71767b]' />
+          {userProfile?.id !== user && !!userProfile && (
+            <div className='flex mb-1 -m-1'>
+              <div className='flex items-center justify-end mr-3 basis-10 grow-0'>
+                <Icons.Repeat2 className='w-4 h-4 text-[#71767b]' />
+              </div>
+              <div className='flex items-center justify-start basis-0 grow shrink'>
+                <Link
+                  href='#'
+                  className='text-[13px] font-semibold cursor-pointer hover:underline text-[#71767b] leading-4 whitespace-nowrap overflow-ellipsis overflow-hidden'
+                >
+                  {id === userProfile?.id
+                    ? 'You'
+                    : userProfile?.username ?? 'User'}{' '}
+                  rehowled
+                </Link>
+              </div>
             </div>
-            <div className='flex items-center justify-start basis-0 grow shrink'>
-              <Link
-                href='#'
-                className='text-[13px] font-semibold cursor-pointer hover:underline text-[#71767b] leading-4 whitespace-nowrap overflow-ellipsis overflow-hidden'
-              >
-                You Rehowled
-              </Link>
-            </div>
-          </div> */}
+          )}
         </div>
         {/* Content */}
         <div className='flex flex-row max-w-full shrink grow basis-auto'>

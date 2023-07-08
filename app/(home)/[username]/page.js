@@ -1,30 +1,39 @@
 'use client'
 import BackButton from '@/components/BackButton'
+import ModalEditProfile from '@/components/ModalEditProfile'
 import PageLayout from '@/components/PageLayout'
 import Post from '@/components/Post'
 import ProfileHeader from '@/components/ProfileHeader'
-import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
-import { getHowlsByUser } from '@/services/api'
+import { getUserByUsername } from '@/services/api'
+import { useAuth } from '@/store/authStore'
+import { useState } from 'react'
 import useSWR from 'swr'
 
-export default function Profile() {
-  
-  const { data: session, status} = useSession() 
-  const user = session?.user
+export default function Profile({ params }) {
+  const { username } = params
 
-  const { data } = useSWR('/api/howls/user', () => getHowlsByUser(session.user._id))
+  const [editProfile, setEditProfile] = useState(false)
+  const { user: userLogged } = useAuth()
+  const { data: user, isLoading } = useSWR(
+    `/api/users/username/${username}`,
+    () => getUserByUsername(username)
+  )
 
-  useEffect(() => {
-    if (data) console.log(data)
-  }, [data])
+  const openEditProfile = () => setEditProfile(true)
 
-  if (status === 'loading') return null
-  if (!user) return null
-  const numHowls = data ? data.length : 0;
+  const closeEditProfile = () => setEditProfile(false)
+
+  if (!userLogged) return null
+
+  if (isLoading) return <div>Loading...</div>
+
+  if (!user) return <div>Not found</div>
+
+  const numHowls = user.howls.length
 
   return (
     <>
+      {editProfile && <ModalEditProfile closeModal={closeEditProfile} />}
       <PageLayout.Container>
         <PageLayout.Header>
           <BackButton />
@@ -37,12 +46,20 @@ export default function Profile() {
             </h3>
           </div>
         </PageLayout.Header>
-        <ProfileHeader />
+        <ProfileHeader user={user} openModal={openEditProfile} />
         <section className='w-full'>
-        {data?.map((howl, index) => (
-          <Post key={index} idHowl={howl._id} />
-        ))}
-      </section>
+          {user?.howls?.map((howl, index) => (
+            <Post
+              key={index}
+              idHowl={howl}
+              id={userLogged?._id}
+              userProfile={{
+                username,
+                id: user?._id,
+              }}
+            />
+          ))}
+        </section>
       </PageLayout.Container>
     </>
   )
