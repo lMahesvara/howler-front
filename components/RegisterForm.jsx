@@ -15,13 +15,15 @@ const RegisterForm = () => {
   }
 
   return (
-    <section className='py-16 shrink grow s:pb-8'>
-      <h1 className='text-4xl font-bold s:hidden'>
+    <section className='flex flex-col items-center justify-center px-12 py-16 shrink grow sm:items-start sm:justify-start md:px-0'>
+      <h1 className='hidden text-3xl font-bold sm:block md:text-4xl'>
         WHAT IS <br /> HAPPENING NOW...
       </h1>
 
-      <p className='mt-32 text-2xl font-semibold s:mt-0'>Join Howler today.</p>
-      <div className='flex flex-col items-center justify-center w-[55%] gap-5 mt-14'>
+      <p className='mt-16 text-3xl font-extrabold sm:font-semibold sm:text-2xl md:mt-32'>
+        Join Howler today.
+      </p>
+      <div className='flex flex-col items-center justify-center md:w-[55%] gap-5 sm:mt-14 mt-12'>
         <button
           type='button'
           onClick={handleOpenModal}
