@@ -19,6 +19,6 @@ export const listMenu = [
   {
     name: 'Profile',
     icon: <Icons.Profile />,
-    href: '/',
+    href: '/username',
   },
 ]

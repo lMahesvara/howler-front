@@ -5,7 +5,8 @@ import RoundedButtonLayout from './RoundedButtonLayout'
 import { useUser } from '@/hooks/useUser'
 import { getFullTime } from '@/lib/utils'
 import { usePostCounters } from '@/hooks/usePostCounters'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import ModalInteracciones from '@/components/Interacciones'
 
 const ExtendedPost = ({ howl, id }) => {
   const { user, text, image, date, likes, rehowls, replies, type } = howl ?? {}
@@ -24,6 +25,16 @@ const ExtendedPost = ({ howl, id }) => {
   useEffect(() => {
     reloadData()
   }, [id, howl])
+
+  const [showModal, setShowModal] = useState(false)
+
+  const openModal = () => {
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
 
   if (isLoading) return null
 
@@ -81,10 +92,12 @@ const ExtendedPost = ({ howl, id }) => {
           <CounterLink
             href={'#'}
             amount={replies.length ?? 0}
-            text={'Comentarios'}
+            text={'Comments'}
           />
           <CounterLink href={'#'} amount={rehowlsCount} text={'Rehowls'} />
-          <CounterLink href={'#'} amount={likesCount} text={'Me gusta'} />
+
+          <CounterLink amount={likesCount} onClick={openModal} text={'Likes'} />
+
         </div>
         <div className='flex flex-wrap gap-5 justify-around border-b py-3 border-[#2f3336]'>
           <RoundedButtonLayout
@@ -117,6 +130,13 @@ const ExtendedPost = ({ howl, id }) => {
           </RoundedButtonLayout>
         </div>
       </div>
+      {showModal && (
+        <ModalInteracciones
+          name='Liked by'
+          howlId={howl._id}
+          closeModal={closeModal}
+        />
+      )}
     </article>
   )
 }

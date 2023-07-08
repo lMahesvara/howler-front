@@ -31,7 +31,7 @@ const RegisterForm = () => {
           Sign up
         </button>
 
-        <button
+        {/* <button
           className='w-full h-12 px-6 transition duration-300 bg-white rounded-md group hover:bg-gray-700 hover:text-white'
           type='button'
           onClick={() => signIn('google')}
@@ -46,7 +46,7 @@ const RegisterForm = () => {
               alt='google logo'
             />
           </div>
-        </button>
+        </button> */}
 
         <div>
           <p className='w-full text-xs italic'>
