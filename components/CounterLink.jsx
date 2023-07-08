@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
 
-const CounterLink = ({ href, amount, text }) => {
+const CounterLink = ({ onClick, amount, text }) => {
   return (
-    <Link
+    <button
       className='mr-5 hover:underline text-[#e7e9ea] text-sm leading-4'
-      href={href}
+      onClick={onClick}
+      type='button'
     >
       {amount} <span className='text-[#71767b] text-sm'>{text}</span>
-    </Link>
+    </button>
   )
 }
 
