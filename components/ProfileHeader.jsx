@@ -4,9 +4,9 @@ import { useAuth } from '@/store/authStore'
 import { signOut } from 'next-auth/react'
 import ProfileNotFound from './ProfileNotFound'
 
-const ProfileHeader = ({ user, openModal }) => {
+const ProfileHeader = ({ user, openModal, username }) => {
   const { user: loggedUser, setUser } = useAuth()
-  if (!user) return <ProfileNotFound />
+  if (!user) return <ProfileNotFound username={username} />
 
   const joinedDate = new Date(user.createdAt)
   const formattedDate = joinedDate.toLocaleDateString('en-US', {

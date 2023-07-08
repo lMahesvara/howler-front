@@ -48,7 +48,11 @@ export default function Profile({ params }) {
             </PageLayout.HeaderTitle>
           )}
         </PageLayout.Header>
-        <ProfileHeader user={user} openModal={openEditProfile} />
+        <ProfileHeader
+          user={user}
+          openModal={openEditProfile}
+          username={username}
+        />
         <section className='w-full'>
           {user?.howls?.map((howl, index) => (
             <Post

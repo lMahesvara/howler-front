@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProfileNotFound = () => {
+const ProfileNotFound = ({ username }) => {
   return (
     <section className='flex flex-col w-full'>
       <div className='flex flex-col'>
@@ -17,7 +17,7 @@ const ProfileNotFound = () => {
             </div>
           </div>
           <h2 className='text-[#e7e9ea] whitespace-nowrap font-extrabold text-xl leading-6 -mt-16'>
-            {'@User not found'}
+            @{username}
           </h2>
         </div>
         <div className='flex flex-col items-start justify-start gap-4 px-4 mx-auto mt-24'>
