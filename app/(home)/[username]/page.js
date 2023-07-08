@@ -23,13 +23,9 @@ export default function Profile({ params }) {
 
   const closeEditProfile = () => setEditProfile(false)
 
-  if (!userLogged) return null
-
   if (isLoading) return <div>Loading...</div>
 
-  if (!user) return <div>Not found</div>
-
-  const numHowls = user.howls.length
+  const numHowls = user?.howls?.length
 
   return (
     <>
@@ -37,14 +33,20 @@ export default function Profile({ params }) {
       <PageLayout.Container>
         <PageLayout.Header>
           <BackButton />
-          <div className='flex flex-col items-start justify-center flex-grow'>
+          {user ? (
+            <div className='flex flex-col items-start justify-center flex-grow'>
+              <PageLayout.HeaderTitle className='text-[#e7e9ea] whitespace-nowrap font-bold text-[17px] leading-5 sm:text-xl'>
+                {user.name}
+              </PageLayout.HeaderTitle>
+              <h3 className='text-[#71767b] whitespace-nowrap font-normal text-[13px] leading-4'>
+                {numHowls} Howls
+              </h3>
+            </div>
+          ) : (
             <PageLayout.HeaderTitle className='text-[#e7e9ea] whitespace-nowrap font-bold text-[17px] leading-5 sm:text-xl'>
-              {user.name}
+              Profile
             </PageLayout.HeaderTitle>
-            <h3 className='text-[#71767b] whitespace-nowrap font-normal text-[13px] leading-4'>
-              {numHowls} Howls
-            </h3>
-          </div>
+          )}
         </PageLayout.Header>
         <ProfileHeader user={user} openModal={openEditProfile} />
         <section className='w-full'>

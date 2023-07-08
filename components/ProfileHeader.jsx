@@ -2,16 +2,23 @@ import { Icons } from './Icons'
 import CounterLink from './CounterLink'
 import { useAuth } from '@/store/authStore'
 import { signOut } from 'next-auth/react'
+import ProfileNotFound from './ProfileNotFound'
 
 const ProfileHeader = ({ user, openModal }) => {
-  const { user: loggedUser } = useAuth()
-  if (!user) return null
+  const { user: loggedUser, setUser } = useAuth()
+  if (!user) return <ProfileNotFound />
 
   const joinedDate = new Date(user.createdAt)
   const formattedDate = joinedDate.toLocaleDateString('en-US', {
     month: 'long',
     year: 'numeric',
   })
+
+  const logOut = () => {
+    signOut({ callbackUrl: '/login' })
+    setUser(null)
+  }
+
   return (
     <section className='flex flex-col'>
       <div className='flex flex-col'>
@@ -35,7 +42,7 @@ const ProfileHeader = ({ user, openModal }) => {
                 />
               </div>
             </div>
-            {loggedUser._id === user._id && (
+            {loggedUser?._id === user._id && (
               <div className='flex gap-4'>
                 <button
                   className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#eff3f41a]'
@@ -45,7 +52,7 @@ const ProfileHeader = ({ user, openModal }) => {
                 </button>
                 <button
                   className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#eff3f41a]'
-                  onClick={() => signOut({ callbackUrl: '/login' })}
+                  onClick={logOut}
                 >
                   Log Out
                 </button>
