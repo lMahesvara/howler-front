@@ -75,7 +75,7 @@ const CreatePost = ({ idHowl, label, user }) => {
   if (!user) return null
 
   return (
-    <article className='relative w-full p-4 overflow-hidden bg-black border-y border-[#2f3336] flex max-w-full shrink pt-6'>
+    <article className='relative w-full p-4 overflow-hidden bg-black border-b border-[#2f3336] flex max-w-full shrink pt-6'>
       <div className='flex flex-row max-w-full shrink grow basis-auto'>
         <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
           <div className='w-10 h-10'>
