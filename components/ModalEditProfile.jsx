@@ -1,7 +1,10 @@
+import { useAuth } from '@/store/authStore'
 import { Icons } from './Icons'
 import PageLayout from './PageLayout'
 
 const ModalEditProfile = ({ closeModal }) => {
+  const { user } = useAuth()
+
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black/50'>
       <div className='relative w-full max-w-[600px] max-h-[600px] bg-black rounded-2xl pb-4 border border-[#333639]'>
@@ -29,7 +32,7 @@ const ModalEditProfile = ({ closeModal }) => {
               </button>
             </div>
             <img
-              src='https://pbs.twimg.com/profile_banners/1569714777773187072/1688576067/1080x360'
+              src={user?.banner}
               alt=''
               className='object-cover object-center w-full h-full'
             />
@@ -44,7 +47,7 @@ const ModalEditProfile = ({ closeModal }) => {
                 </button>
               </div>
               <img
-                src='https://pbs.twimg.com/profile_images/1569717076016635904/3CrnYh9h_400x400.jpg'
+                src={user?.image}
                 alt=''
                 className='object-cover object-center w-full h-full rounded-full'
               />
@@ -62,7 +65,7 @@ const ModalEditProfile = ({ closeModal }) => {
               </div>
               <input
                 type='text'
-                defaultValue='root'
+                defaultValue={user?.name}
                 maxLength={50}
                 className='bg-transparent text-[#e7e9ea] leading-6 text-[17px] font-normal focus:outline-none'
               />
