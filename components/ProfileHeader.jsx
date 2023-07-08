@@ -12,7 +12,6 @@ const ProfileHeader = ({ user, openModal }) => {
     month: 'long',
     year: 'numeric',
   })
-  //console.log(user)
   return (
     <section className='flex flex-col'>
       <div className='flex flex-col'>

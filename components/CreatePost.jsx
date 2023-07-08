@@ -54,9 +54,7 @@ const CreatePost = ({ idHowl, label, user }) => {
         user: user._id,
       }
 
-      await replyHowl(idHowl, howl).then(res => {
-        console.log(res)
-      })
+      await replyHowl(idHowl, howl).then(res => {})
       mutate(`/api/howls/${idHowl}`)
     } else {
       //TODO: Sacar hashtags
@@ -66,9 +64,7 @@ const CreatePost = ({ idHowl, label, user }) => {
         user: user._id,
       }
 
-      await postHowl(howl).then(res => {
-        console.log(res)
-      })
+      await postHowl(howl).then(res => {})
       mutate('/api/howls')
     }
     setText('')

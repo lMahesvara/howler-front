@@ -73,18 +73,6 @@ export const authOptions = {
       }
       return token
     },
-    // signIn: async ({user}) => {
-    //   try {
-    //     const {user: updatedUser} = await loginGoogle(user)
-    //     return{
-    //       ...user,
-    //       ...updatedUser,
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //     return false
-    //   }
-    // }
   },
   secret: process.env.SECRET,
 }

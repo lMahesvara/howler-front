@@ -145,7 +145,6 @@ export const login = async userObject => {
     })
 
     let data = await response.json()
-    // console.log(data)
 
     return data
   } catch (error) {}
@@ -163,7 +162,6 @@ export const loginGoogle = async userObject => {
     })
 
     let data = await response.json()
-    // console.log(data)
 
     return data
   } catch (error) {

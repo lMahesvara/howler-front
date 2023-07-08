@@ -14,7 +14,6 @@ const Page = ({ params }) => {
   const { howl, isLoading } = useHowl(idHowl)
 
   if (isLoading) return null
-  console.log(user)
 
   return (
     <PageLayout.Container>

@@ -3,14 +3,18 @@ import { Icons } from './Icons'
 import { signIn } from 'next-auth/react'
 
 const ModalLogin = ({ handleCloseModal }) => {
+  const handleSubmit = async event => {
+    event.preventDefault()
+    const data = new FormData(event.target)
+    const username = data.get('username')
+    const password = data.get('password')
 
-  const handleSubmit = async (event) =>{
-      event.preventDefault()
-      const data = new FormData(event.target)
-      const username = data.get('username')
-      const password = data.get('password')
-      
-      console.log(await signIn("credentials",{username, password, redirect: true, callbackUrl:'/home'}))
+    await signIn('credentials', {
+      username,
+      password,
+      redirect: true,
+      callbackUrl: '/home',
+    })
   }
 
   return (
@@ -61,7 +65,7 @@ const ModalLogin = ({ handleCloseModal }) => {
             </div>
             <button
               type='submit'
-              className='w-full h-8 my-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis' 
+              className='w-full h-8 my-6 font-semibold text-black transition duration-300 bg-white rounded-md cursor-pointer group hover:bg-gray-700 hover:text-white overflow-ellipsis'
             >
               Log in
             </button>
