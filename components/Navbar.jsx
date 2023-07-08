@@ -21,10 +21,8 @@ const Navbar = () => {
   )
 
   useEffect(() => {
-    if (dataUser) {
-      console.log(dataUser)
-      setUser(dataUser)
-    }
+    if (dataUser) setUser(dataUser)
+
     if (status === 'unauthenticated') setUser(null)
   }, [dataUser, status])
 
