@@ -15,10 +15,5 @@ export const listMenu = [
     name: 'Messages',
     icon: <Icons.Messages />,
     href: '/',
-  },
-  {
-    name: 'Profile',
-    icon: <Icons.Profile />,
-    href: '/username',
-  },
+  }
 ]

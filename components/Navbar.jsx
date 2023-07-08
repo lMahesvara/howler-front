@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import { useAuth } from '@/store/authStore'
 import useSWR from 'swr'
 import { getUser } from '@/services/api'
+import { Icons, icons } from '@/components/Icons'
 
 const Navbar = () => {
   const { data, status } = useSession()
@@ -38,7 +39,14 @@ const Navbar = () => {
           {listMenu.map((item, index) => (
             <NavLinks key={index} {...item} />
           ))}
+          <NavLinks href={`/${user.username}`} name='Profile' icon={<Icons.Profile/>}/>
         </section>
+
+        {/*   {
+    name: 'Profile',
+    icon: <Icons.Profile />,
+    href: '/username',
+  }, */}
         <LittleUser />
       </div>
     </header>
