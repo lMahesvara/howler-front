@@ -1,12 +1,19 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import RegisterForm from '../../../components/RegisterForm'
 import LoginForm from '../../../components/LoginForm'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const { data, status } = useSession()
-  console.log(data, status)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/home')
+    }
+  }, [status])
 
   return (
     <div className='grow shrink'>

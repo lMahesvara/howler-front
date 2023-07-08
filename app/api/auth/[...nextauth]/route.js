@@ -30,7 +30,7 @@ export const authOptions = {
   },
   callbacks: {
     session: async ({ session, token, user }) => {
-      //console.log(session, token, user)
+      console.log(session, token, user)
       return {
         ...session,
         accessToken: token?.accessToken || '',
