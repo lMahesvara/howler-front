@@ -14,14 +14,24 @@ const ProfilePage = ({ params }) => {
 
   const [editProfile, setEditProfile] = useState(false)
   const { user: userLogged } = useAuth()
-  const { data: user, isLoading } = useSWR(
+  const {
+    data: user,
+    isLoading,
+    mutate,
+  } = useSWR(
     `/api/users/username/${username}`,
-    () => getUserByUsername(username)
+    () => getUserByUsername(username),
+    {
+      revalidateOnFocus: false,
+    }
   )
 
   const openEditProfile = () => setEditProfile(true)
 
-  const closeEditProfile = () => setEditProfile(false)
+  const closeEditProfile = () => {
+    setEditProfile(false)
+    mutate()
+  }
 
   //if (isLoading) return <div>Loading...</div>
 
