@@ -1,11 +1,10 @@
 import { Icons } from './Icons'
 import CounterLink from './CounterLink'
 import { useAuth } from '@/store/authStore'
-import { signOut } from 'next-auth/react'
 import ProfileNotFound from './ProfileNotFound'
 
 const ProfileHeader = ({ user, openModal, username }) => {
-  const { user: loggedUser, setUser } = useAuth()
+  const { user: loggedUser } = useAuth()
   if (!user) return <ProfileNotFound username={username} />
 
   const joinedDate = new Date(user.createdAt)
@@ -13,11 +12,6 @@ const ProfileHeader = ({ user, openModal, username }) => {
     month: 'long',
     year: 'numeric',
   })
-
-  const logOut = () => {
-    signOut({ callbackUrl: '/login' })
-    setUser(null)
-  }
 
   return (
     <section className='flex flex-col'>
@@ -33,8 +27,8 @@ const ProfileHeader = ({ user, openModal, username }) => {
         {/* info */}
         <div className='flex flex-col px-4 pt-3 mb-4'>
           <div className='flex flex-wrap items-start justify-between'>
-            <div className='w-1/4 min-w-[48px] -mt-[15%] mb-3 h-auto overflow-visible relative'>
-              <div className='object-cover object-center w-[150px] h-[150px] border-4 border-black rounded-full'>
+            <div className='w-1/4 min-w-[48px] transform -translate-y-1/2 h-auto overflow-visible relative'>
+              <div className='object-cover object-center border-4 border-black rounded-full'>
                 <img
                   src={user.image}
                   alt=''
@@ -43,20 +37,12 @@ const ProfileHeader = ({ user, openModal, username }) => {
               </div>
             </div>
             {loggedUser?._id === user._id && (
-              <div className='flex gap-4'>
-                <button
-                  className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#eff3f41a]'
-                  onClick={openModal}
-                >
-                  Edit Profile
-                </button>
-                <button
-                  className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#eff3f41a]'
-                  onClick={logOut}
-                >
-                  Log Out
-                </button>
-              </div>
+              <button
+                className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#eff3f41a]'
+                onClick={openModal}
+              >
+                Edit profile
+              </button>
             )}
           </div>
           <div className='flex flex-col gap-1 mt-1 mb-3 shrink'>
