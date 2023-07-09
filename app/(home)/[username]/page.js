@@ -7,9 +7,15 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
   const user = await getUserByUsername(username)
 
+  if (!user)
+    return {
+      title: `Profile - Howler`,
+      description: `User not found`,
+    }
+
   return {
     title: `${user?.name} (@${user?.username}) - Howler`,
-    description: `${user.name} profile`,
+    description: `${user?.name} profile`,
   }
 }
 
