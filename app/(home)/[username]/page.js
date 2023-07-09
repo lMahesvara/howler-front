@@ -23,7 +23,7 @@ export default function Profile({ params }) {
 
   const closeEditProfile = () => setEditProfile(false)
 
-  if (isLoading) return <div>Loading...</div>
+  //if (isLoading) return <div>Loading...</div>
 
   const numHowls = user?.howls?.length
 

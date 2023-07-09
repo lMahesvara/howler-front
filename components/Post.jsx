@@ -32,7 +32,7 @@ const Post = ({ idHowl, id, userProfile = null }) => {
     reloadData()
   }, [isLoadingHowl, howl, id])
 
-  if (isLoadingUser || isLoadingHowl) return null
+  //if (isLoadingUser || isLoadingHowl) return null
 
   return (
     <article
@@ -66,17 +66,19 @@ const Post = ({ idHowl, id, userProfile = null }) => {
         <div className='flex flex-row max-w-full shrink grow basis-auto'>
           <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
             <Link
-              className='w-10 h-10'
+              className='w-10 h-10 rounded-full bg-[#16181c]'
               href={`/${userData?.username}`}
               onClick={e => {
                 e.stopPropagation()
               }}
             >
-              <img
-                src={userData?.image}
-                alt=''
-                className='w-full h-full transition-opacity duration-200 rounded-full hover:opacity-80'
-              />
+              {userData && (
+                <img
+                  src={userData?.image}
+                  alt=''
+                  className='w-full h-full transition-opacity duration-200 rounded-full hover:opacity-80'
+                />
+              )}
             </Link>
           </div>
 

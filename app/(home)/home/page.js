@@ -17,7 +17,7 @@ export default function Home() {
     refreshInterval: 1000,
   })
 
-  if (isLoading) return <div>Loading...</div>
+  //if (isLoading) return <div>Loading...</div>
 
   if (error) return <div>Error</div>
   return (

@@ -72,18 +72,20 @@ const CreatePost = ({ idHowl, label, user }) => {
     imageRef.current.value = ''
   }
 
-  if (!user) return null
+  //if (!user) return null
 
   return (
     <article className='relative w-full p-4 overflow-hidden bg-black border-b border-[#2f3336] flex max-w-full shrink pt-6'>
       <div className='flex flex-row max-w-full shrink grow basis-auto'>
         <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
-          <div className='w-10 h-10'>
-            <img
-              src={user?.image}
-              alt='user'
-              className='w-full h-full transition-opacity duration-200 rounded-full cursor-pointer hover:opacity-80'
-            />
+          <div className='w-10 h-10 rounded-full bg-[#16181c]'>
+            {user && (
+              <img
+                src={user?.image}
+                alt='user'
+                className='w-full h-full transition-opacity duration-200 rounded-full cursor-pointer hover:opacity-80'
+              />
+            )}
           </div>
         </div>
 
