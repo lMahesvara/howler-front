@@ -48,6 +48,22 @@ export const postUser = async userObject => {
   }
 }
 
+export const updateUser = async (id, user) => {
+  try {
+    return await (
+      await fetch(`${API_URL}/users/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+    ).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getHowl = async id => {
   try {
     return await (await fetch(`${API_URL}/howls/${id}`)).json()
