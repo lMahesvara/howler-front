@@ -26,8 +26,7 @@ const ProfileHeader = ({ user, openModal, username }) => {
     try {
       const response = await unfollowUser(user._id, loggedUser._id)
       console.log(response)
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   return (
@@ -43,13 +42,13 @@ const ProfileHeader = ({ user, openModal, username }) => {
         </div>
         {/* info */}
         <div className='flex flex-col px-4 pt-3 mb-4'>
-          <div className='flex flex-wrap items-start justify-between'>
-            <div className='w-1/4 min-w-[48px] transform -translate-y-1/2 h-auto overflow-visible relative'>
+          <div className='flex flex-wrap items-start justify-between h-12 mb-4 shrink sm:h-16 md:h-18 lg:h-20 '>
+            <div className='min-w-[48px] transform -translate-y-1/2 h-auto overflow-visible relative'>
               <div className='object-cover object-center border-4 border-black rounded-full'>
                 <img
                   src={user.image}
                   alt=''
-                  className='object-cover object-center w-full h-full rounded-full'
+                  className='object-cover object-center w-24 w-full h-24 h-full rounded-full sm:w-32 sm:h-32 md:w-36 md:h-36'
                 />
               </div>
             </div>
@@ -68,7 +67,6 @@ const ProfileHeader = ({ user, openModal, username }) => {
                     onClick={handleUnfollowUser}
                   >
                     Followed
-                    
                   </button>
                 ) : (
                   <button
