@@ -29,8 +29,16 @@ export const authOptions = {
     signIn: '/login',
   },
   callbacks: {
-    session: async ({ session, token }) => {
-      if (token?.provider === 'credentials') {
+    session: async ({ token, session }) => {
+      if (!token?.provider) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            ...token.user,
+          },
+        }
+      } else if (token?.provider === 'credentials') {
         return {
           ...session,
           accessToken: token?.accessToken || '',
