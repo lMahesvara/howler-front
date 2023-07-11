@@ -33,6 +33,7 @@ const HomePage = () => {
         {dataHowl?.map((howl, index) => (
           <Post key={index} idHowl={howl._id} id={user?._id} />
         ))}
+        <div className='md:w-[590px]'></div>
       </section>
     </PageLayout.Container>
   )
