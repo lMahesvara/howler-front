@@ -62,7 +62,7 @@ const ProfilePage = ({ params }) => {
           openModal={openEditProfile}
           username={username}
         />
-        <section className='w-full'>
+        <section className='w-full border-t border-[#2f3336]'>
           {user?.howls?.toReversed().map((howl, index) => (
             <Post
               key={index}
