@@ -184,3 +184,33 @@ export const loginGoogle = async userObject => {
     console.log(error)
   }
 }
+
+export const followUser = async (idUserFollow, idUser) => {
+  try {
+    return await (
+      await fetch(`${API_URL}/follow/${idUserFollow}/${idUser}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    ).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const unfollowUser = async (idUserUnfollow, idUser) =>{
+  try {
+    return await (
+      await fetch(`${API_URL}/follow/unfollow/${idUserUnfollow}/${idUser}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    ).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
