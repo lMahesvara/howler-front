@@ -63,7 +63,7 @@ const ProfilePage = ({ params }) => {
           username={username}
         />
         <section className='w-full'>
-          {user?.howls?.map((howl, index) => (
+          {user?.howls?.toReversed().map((howl, index) => (
             <Post
               key={index}
               idHowl={howl}
