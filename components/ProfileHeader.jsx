@@ -48,7 +48,7 @@ const ProfileHeader = ({ user, openModal, username }) => {
                 <img
                   src={user.image}
                   alt=''
-                  className='object-cover object-center w-24 w-full h-24 h-full rounded-full sm:w-32 sm:h-32 md:w-36 md:h-36'
+                  className='object-cover object-center w-24 h-24 rounded-full sm:w-32 sm:h-32 md:w-36 md:h-36'
                 />
               </div>
             </div>
