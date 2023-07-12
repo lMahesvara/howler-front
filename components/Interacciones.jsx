@@ -4,6 +4,10 @@ import SeguirUser from './SeguirUser'
 const ModalInteracciones = ({ name, users, closeModal }) => {
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50'>
+      <div
+        className='absolute inset-0 z-0 w-full h-full'
+        onClick={closeModal}
+      ></div>
       <div className='relative w-full max-w-2xl mx-auto bg-black border border-gray-700 shadow-lg rounded-3xl md:w-3/5'>
         <button
           onClick={closeModal}
