@@ -27,6 +27,7 @@ const ExtendedPost = ({ howl, id }) => {
   }, [id, howl])
 
   const [showModal, setShowModal] = useState(false)
+  const [showModalRehowl, setShowModalRehowl] = useState(false)
 
   const openModal = () => {
     setShowModal(true)
@@ -34,6 +35,14 @@ const ExtendedPost = ({ howl, id }) => {
 
   const closeModal = () => {
     setShowModal(false)
+  }
+
+  const openModalRehowl = () => {
+    setShowModalRehowl(true)
+  }
+
+  const closeModalRehowl = () => {
+    setShowModalRehowl(false)
   }
 
   if (isLoading) return null
@@ -89,15 +98,14 @@ const ExtendedPost = ({ howl, id }) => {
           </Link>
         </div>
         <div className='flex flex-wrap gap-5 border-y border-[#2f3336] py-4 justify-evenly'>
+          <CounterLink amount={replies.length ?? 0} text={'Comments'} />
           <CounterLink
-            href={'#'}
-            amount={replies.length ?? 0}
-            text={'Comments'}
+            amount={rehowlsCount}
+            text={'Rehowls'}
+            onClick={openModalRehowl}
           />
-          <CounterLink href={'#'} amount={rehowlsCount} text={'Rehowls'} />
 
           <CounterLink amount={likesCount} onClick={openModal} text={'Likes'} />
-
         </div>
         <div className='flex flex-wrap gap-5 justify-around border-b py-3 border-[#2f3336]'>
           <RoundedButtonLayout
@@ -133,8 +141,15 @@ const ExtendedPost = ({ howl, id }) => {
       {showModal && (
         <ModalInteracciones
           name='Liked by'
-          howlId={howl._id}
+          users={likes}
           closeModal={closeModal}
+        />
+      )}
+      {showModalRehowl && (
+        <ModalInteracciones
+          name='Rehowled by'
+          users={rehowls}
+          closeModal={closeModalRehowl}
         />
       )}
     </article>

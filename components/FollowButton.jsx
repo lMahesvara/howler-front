@@ -5,9 +5,9 @@ import { useState } from 'react'
 const FollowButton = ({ user }) => {
   const { user: loggedUser } = useAuth()
 
-  const [isFollowing, setIsFollowing] = useState(
-    loggedUser?.following.includes(user?._id)
-  )
+  const initialIsFollowing = loggedUser?.following.includes(user?._id)
+
+  const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
 
   const handleFollowUser = async e => {
     e.stopPropagation()
