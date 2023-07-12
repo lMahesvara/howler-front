@@ -2,7 +2,7 @@ import { Icons } from './Icons'
 import CounterLink from './CounterLink'
 import { useAuth } from '@/store/authStore'
 import ProfileNotFound from './ProfileNotFound'
-import { followUser, unfollowUser } from '@/services/api'
+import FollowButton from './FollowButton'
 
 const ProfileHeader = ({ user, openModal, username }) => {
   const { user: loggedUser } = useAuth()
@@ -13,21 +13,6 @@ const ProfileHeader = ({ user, openModal, username }) => {
     month: 'long',
     year: 'numeric',
   })
-
-  const isFollowing = loggedUser?.following.includes(user._id)
-
-  const handleFollowUser = async () => {
-    try {
-      const response = await followUser(user._id, loggedUser._id)
-    } catch (error) {}
-  }
-
-  const handleUnfollowUser = async () => {
-    try {
-      const response = await unfollowUser(user._id, loggedUser._id)
-      console.log(response)
-    } catch (error) {}
-  }
 
   return (
     <section className='flex flex-col'>
@@ -60,23 +45,7 @@ const ProfileHeader = ({ user, openModal, username }) => {
                 Edit profile
               </button>
             ) : (
-              <>
-                {isFollowing ? (
-                  <button
-                    className='mb-3 border border-[#536471] min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:text-[#f4212e] hover:border-[#f4212e]'
-                    onClick={handleUnfollowUser}
-                  >
-                    Followed
-                  </button>
-                ) : (
-                  <button
-                    className='mb-3 min-w-[36px] min-h-[36px] px-4 rounded-full text-[15px] leadin-5 font-bold text-[#eff3f4] hover:bg-[#1a8cd8] hover:text-white bg-[#1d9bf0]'
-                    onClick={handleFollowUser}
-                  >
-                    Follow
-                  </button>
-                )}
-              </>
+              <FollowButton user={user} />
             )}
           </div>
           <div className='flex flex-col gap-1 mt-1 mb-3 shrink'>
@@ -97,12 +66,12 @@ const ProfileHeader = ({ user, openModal, username }) => {
             <CounterLink
               href='#'
               amount={user.following.length}
-              text={'Siguiendo'}
+              text={'Following'}
             />
             <CounterLink
               href='#'
               amount={user.followers.length}
-              text={'Seguidores'}
+              text={'Followers'}
             />
           </div>
         </div>

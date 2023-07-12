@@ -2,45 +2,54 @@
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import { getUser } from '@/services/api'
+import { useAuth } from '@/store/authStore'
+import { useRouter } from 'next/navigation'
+import FollowButton from './FollowButton'
 
-const SeguirUser = ({userId}) => {
+const SeguirUser = ({ userId }) => {
+  const { user: loggedUser } = useAuth()
+  const router = useRouter()
+
   const [user, setUser] = useState(null)
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const fetchUser = () => {
-      getUser(userId).then((user) => {
+      getUser(userId).then(user => {
         setUser(user)
       })
     }
 
     fetchUser()
   }, [userId])
-  
+
   if (!user) return null
 
   return (
-    <article className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full w-full'>
-      <div className='flex flex-col max-w-full w-full'>
-        <div className='flex flex-row justify-between'>
-          <div className='flex w-full xl:mr-3'>
-            <div className='w-8 h-8 xl:w-10 xl:h-10 mr-1'>
+    <article
+      className='relative shrink-0 grow-0 overflow-hidden bg-black cursor-pointer  border-[#2f3336] flex hover:bg-[#eff3f41a] rounded-full p-3 max-w-full w-full'
+      onClick={() => router.push(`/${user?.username}`)}
+    >
+      <div className='flex flex-col w-full max-w-full'>
+        <div className='flex flex-row justify-between max-w-full'>
+          <div className='flex w-full xl:mr-3 max-w-[calc(100%-40px-2rem-50px)]'>
+            <Link className='mr-3' href={`/${user?.username}`}>
               <img
                 src={user.image}
                 alt=''
-                className='w-[30px] h-[30px] transition-opacity duration-200 rounded-full hover:opacity-80 xl:w-[40px] xl:h-[40px]'
+                className='w-[40px] h-[40px] transition-opacity duration-200 rounded-full hover:opacity-80'
               />
-            </div>
-            <div className='flex-col  max-w-[calc(100%-40px-1.5rem)] xl:flex'>
+            </Link>
+            <div className='flex-col  max-w-[calc(100%-40px-.75rem)] xl:flex'>
               <div className='flex flex-col'>
                 <Link
-                  className='text-[12px] font-bold text-[#e7e9ea] leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden xl:text-[15px]'
-                  href='#'
+                  className='font-bold text-[#e7e9ea] leading-5 whitespace-nowrap overflow-ellipsis overflow-hidden text-[15px]'
+                  href={`/${user?.username}`}
                 >
                   {user.name}
                 </Link>
                 <Link
-                  className='text-[12px] font-normal shrink text-[#71767b] leading-5  whitespace-nowrap overflow-ellipsis overflow-hidden xl:text-[15px]'
-                  href='#'
+                  className='font-normal shrink text-[#71767b] leading-5  whitespace-nowrap overflow-ellipsis overflow-hidden text-[15px]'
+                  href={`/${user?.username}`}
                 >
                   @{user.username}
                 </Link>
@@ -48,14 +57,11 @@ const SeguirUser = ({userId}) => {
             </div>
           </div>
           {/* #1d9bf01a */}
-          <div className='flex items-center mr-3'>
-          <button
-              type='button'
-              className='bg-white cursor-pointer w-16 h-7 rounded-full text-black text-[15px] disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-[#eff3f4] disabled:text-[#2f3336] transition-colors duration-200 hover:bg-gray-700 hover:text-white'
-            >
-              Follow
-            </button>
-          </div>
+          {user?._id === loggedUser?._id ? null : (
+            <div className='flex items-center'>
+              <FollowButton user={user} />
+            </div>
+          )}
         </div>
       </div>
     </article>
