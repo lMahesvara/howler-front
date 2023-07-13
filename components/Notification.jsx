@@ -11,6 +11,7 @@ const Notification = () => {
                 alt='user'
                 className='w-[40px] h-[40px] transition-opacity duration-200 rounded-full hover:opacity-80'
               />
+              <Icons.Heart className='absolute fill-current bottom-4 left-8 text-[#f91880]'/>
             </div>
           </div>
           <div className='flex flex-col'>
@@ -18,7 +19,7 @@ const Notification = () => {
                 <p>Jonathan Aguilar </p>
                 <p>agregó una publicación</p>
             </div>
-            <div>
+            <div className='text-[15px] font-normal shrink text-[#71767b] leading-5 hover:underline whitespace-nowrap'>
                 hace 9 horas
             </div>
           </div>

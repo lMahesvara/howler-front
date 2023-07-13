@@ -13,7 +13,7 @@ const NotificationsPage = () => {
           </PageLayout.HeaderTitle>
         </div>
       </PageLayout.Header>
-      <section>
+      <section className='w-full'>
         <Notification/>
       </section>
     </PageLayout.Container>
