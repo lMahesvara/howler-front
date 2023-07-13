@@ -22,7 +22,7 @@ const ProfilePage = ({ params }) => {
     `/api/users/username/${username}`,
     () => getUserByUsername(username),
     {
-      revalidateOnFocus: false,
+      refreshInterval: 1000,
     }
   )
 
