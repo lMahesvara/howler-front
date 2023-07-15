@@ -229,3 +229,11 @@ export const deleteHowl = async id => {
     throw new Error(error)
   }
 }
+
+export const getMentions = async query => {
+  try {
+    return await (await fetch(`${API_URL}/users/mentions/${query}`)).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
