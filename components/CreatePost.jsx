@@ -4,14 +4,38 @@ import { Icons } from './Icons'
 import RoundedButtonLayout from './RoundedButtonLayout'
 import { useSWRConfig } from 'swr'
 import { getSignature } from '@/app/_actions'
-import { postHowl, replyHowl } from '@/services/api'
+import { getMentions, postHowl, replyHowl } from '@/services/api'
+import { Mention } from 'primereact/mention'
+import MentionTemplate from './MentionTemplate'
 
 const CreatePost = ({ idHowl, label, user }) => {
   const [image, setImage] = useState(null)
   const [text, setText] = useState('')
   const imageRef = useRef(null)
-
   const { mutate } = useSWRConfig()
+
+  const [suggestions, setSuggestions] = useState([])
+  const [search, setSearch] = useState('')
+
+  const onSearch = event => {
+    if (!event.query.trim().length) return setSuggestions([])
+    console.log('searching')
+    const query = event.query
+    setSearch(query)
+  }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (!search) return setSuggestions([])
+      const users = await getMentions(search)
+      console.log(users)
+      setSuggestions(users)
+    }, 300)
+
+    return () => {
+      clearTimeout(delayDebounceFn)
+    }
+  }, [search])
 
   useEffect(() => {
     return () => {
@@ -75,7 +99,7 @@ const CreatePost = ({ idHowl, label, user }) => {
   //if (!user) return null
 
   return (
-    <article className='relative w-full p-4 overflow-hidden bg-black border-b border-[#2f3336] flex max-w-full shrink pt-6'>
+    <article className='relative w-full p-4 bg-black border-b border-[#2f3336] flex max-w-full shrink pt-6'>
       <div className='flex flex-row max-w-full shrink grow basis-auto'>
         <div className='box-border relative flex mr-3 basis-10 grow-0 shrink-0'>
           <div className='w-10 h-10 rounded-full bg-[#16181c]'>
@@ -93,12 +117,31 @@ const CreatePost = ({ idHowl, label, user }) => {
           className='box-border flex flex-col shrink grow basis-0 max-w-[calc(100%-40px-1rem)] sm:max-w-[calc(100%-40px)]'
           action={action}
         >
-          <input
-            type='text'
-            className='p-2 pl-4 bg-[#eff3f41a] rounded-full placeholder-gray focus:ring-0 focus:outline-none'
-            placeholder={label}
+          <Mention
             value={text}
             onChange={e => setText(e.target.value)}
+            placeholder={label}
+            field={'username'}
+            className='pl-2 '
+            suggestions={suggestions}
+            onSearch={onSearch}
+            inputStyle={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              outline: 'none',
+              width: '100%',
+              height: '100%',
+              boxShadow: 'none',
+              color: '#eff3f4',
+              resize: 'none',
+            }}
+            panelStyle={{
+              backgroundColor: 'black',
+              border: '1px solid #2f3336',
+            }}
+            rows={1}
+            itemTemplate={MentionTemplate}
+            {...{ autoResize: true }}
           />
           {image && (
             <div className='relative w-full h-full mt-3 overflow-hidden rounded-2xl grow'>

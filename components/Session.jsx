@@ -1,8 +1,13 @@
 'use client'
 import { SessionProvider } from 'next-auth/react'
+import { PrimeReactProvider } from 'primereact/api'
 
 const SessionProviderLayout = ({ children }) => {
-  return <SessionProvider basePath='/api/auth'>{children}</SessionProvider>
+  return (
+    <PrimeReactProvider>
+      <SessionProvider basePath='/api/auth'>{children}</SessionProvider>
+    </PrimeReactProvider>
+  )
 }
 
 export default SessionProviderLayout
