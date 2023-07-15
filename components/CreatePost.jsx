@@ -101,9 +101,7 @@ const CreatePost = ({ idHowl, label, user }) => {
         user: user._id,
       }
 
-      await postHowl(howl).then(res => {
-        console.log(res)
-      })
+      await postHowl(howl).then(res => {})
       mutate('/api/howls')
     }
     setText('')
