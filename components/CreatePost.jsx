@@ -17,11 +17,24 @@ const CreatePost = ({ idHowl, label, user }) => {
   const [suggestions, setSuggestions] = useState([])
   const [search, setSearch] = useState('')
 
+  const LIMIT = 255
+  const limitStyles =
+    text.length >= LIMIT
+      ? 'text-[#f41f2d]'
+      : text.length >= LIMIT - 20
+      ? 'text-[#ffd400]'
+      : 'text-[#1d9bf0]'
+
   const onSearch = event => {
     if (!event.query.trim().length) return setSuggestions([])
     console.log('searching')
     const query = event.query
     setSearch(query)
+  }
+
+  const handleChange = e => {
+    if (e.target.value.length > 255) return
+    setText(e.target.value)
   }
 
   useEffect(() => {
@@ -88,7 +101,9 @@ const CreatePost = ({ idHowl, label, user }) => {
         user: user._id,
       }
 
-      await postHowl(howl).then(res => {})
+      await postHowl(howl).then(res => {
+        console.log(res)
+      })
       mutate('/api/howls')
     }
     setText('')
@@ -119,7 +134,7 @@ const CreatePost = ({ idHowl, label, user }) => {
         >
           <Mention
             value={text}
-            onChange={e => setText(e.target.value)}
+            onChange={handleChange}
             placeholder={label}
             field={'username'}
             className='pl-2 '
@@ -186,12 +201,19 @@ const CreatePost = ({ idHowl, label, user }) => {
               <Icons.FileImage className='w-[20px]' />
               <span className='text-[13px] leading-4 '>Picture</span>
             </RoundedButtonLayout>
-            <input
-              type='submit'
-              value='Howl'
-              disabled={!text && !image}
-              className='bg-white cursor-pointer w-16 h-7 rounded-full text-black text-[15px] disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-[#eff3f4] disabled:text-[#2f3336] transition-colors duration-200 hover:bg-[#e3e8e9] hover:text-[#2f3336]'
-            />
+            <div className='flex items-center gap-4'>
+              <small
+                className={`text-[13px] leading-4 font-bold ${limitStyles}`}
+              >
+                {text.length} / 255
+              </small>
+              <input
+                type='submit'
+                value='Howl'
+                disabled={!text && !image}
+                className='bg-white cursor-pointer w-16 h-7 rounded-full text-black text-[15px] disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-[#eff3f4] disabled:text-[#2f3336] transition-colors duration-200 hover:bg-[#e3e8e9] hover:text-[#2f3336]'
+              />
+            </div>
           </div>
         </form>
       </div>
