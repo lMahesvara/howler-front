@@ -169,7 +169,7 @@ const Post = ({ idHowl, id, userProfile = null }) => {
                 )}
               </div>
               {/* text */}
-              <p className='text-[rgb(231,233,234)] font-normal text-[15px] leading-5 relative whitespace-pre-wrap'>
+              <p className='text-[rgb(231,233,234)] font-normal text-[15px] leading-5 relative whitespace-pre-wrap overflow-ellipsis overflow-clip'>
                 {text}
               </p>
               {/* Image */}
