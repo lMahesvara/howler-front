@@ -13,7 +13,7 @@ const HomePage = () => {
     error,
     isLoading,
   } = useSWR('/api/howls', () => getHome(), {
-    refreshInterval: 1000,
+    refreshInterval: 10000,
   })
 
   //if (isLoading) return <div>Loading...</div>

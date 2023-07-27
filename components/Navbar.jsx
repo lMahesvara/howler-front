@@ -16,8 +16,7 @@ const Navbar = () => {
 
   const { data: dataUser } = useSWR(
     `/api/users/${user?._id ?? ''}`,
-    () => getUser(user?._id ?? ''),
-    { refreshInterval: 1000 }
+    () => getUser(user?._id ?? '')
   )
 
   useEffect(() => {

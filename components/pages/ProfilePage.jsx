@@ -18,12 +18,8 @@ const ProfilePage = ({ params }) => {
     data: user,
     isLoading,
     mutate,
-  } = useSWR(
-    `/api/users/username/${username}`,
-    () => getUserByUsername(username),
-    {
-      refreshInterval: 1000,
-    }
+  } = useSWR(`/api/users/username/${username}`, () =>
+    getUserByUsername(username)
   )
 
   const openEditProfile = () => setEditProfile(true)
