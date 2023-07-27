@@ -2,7 +2,7 @@ import { Icons } from './Icons'
 import CounterLink from './CounterLink'
 import { useAuth } from '@/store/authStore'
 import ProfileNotFound from './ProfileNotFound'
-import { followUser, unfollowUser } from '@/services/api'
+import { followUser, unfollowUser, addNotification } from '@/services/api'
 
 const ProfileHeader = ({ user, openModal, username }) => {
   const { user: loggedUser } = useAuth()
@@ -19,7 +19,17 @@ const ProfileHeader = ({ user, openModal, username }) => {
   const handleFollowUser = async () => {
     try {
       const response = await followUser(user._id, loggedUser._id)
-    } catch (error) {}
+      const notification = {
+        userTo: user?._id,
+        userFrom: loggedUser?._id,
+        type: "follow",
+        title: "started following you",
+        body: "",
+      }
+      console.log(await addNotification(notification))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleUnfollowUser = async () => {

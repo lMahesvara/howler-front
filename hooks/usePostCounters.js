@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { likeHowl, rehowlHowl, unlikeHowl } from '@/services/api'
+import { likeHowl, rehowlHowl, unlikeHowl, addNotification } from '@/services/api'
 import { toast } from 'sonner'
 
 export const usePostCounters = ({
@@ -36,6 +36,15 @@ export const usePostCounters = ({
       setLikesCount(likes)
     } else {
       const { likes } = await likeHowl(idHowl, id)
+      const notification = {
+        userTo: user,
+        userFrom: id,
+        type: "like",
+        howl: idHowl,
+        title: "likes your howl",
+        body: "",
+      }
+      await addNotification(notification)
       setLikesCount(likes)
     }
     setLike(!like)
@@ -48,6 +57,15 @@ export const usePostCounters = ({
       return toast.error("You can't rehowl your own howl")
     }
 
+    const notification = {
+      userTo: user,
+      userFrom: id,
+      type: "rehowl",
+      howl: idHowl,
+      title: "rehowled your howl",
+      body: "",
+    }
+    await addNotification(notification)
     const { rehowls } = await rehowlHowl(idHowl, id)
     setRehowlsCount(rehowls)
     setRehowl(!rehowl)
