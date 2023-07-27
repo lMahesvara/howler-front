@@ -19,13 +19,6 @@ const Notification = ({ notification, createdAt }) => {
     fetchUserDetails()
   }, [notification?.userFrom])
 
-  const notificationMessages = {
-    like: 'likes your howl',
-    rehowl: 'rehowled your howl',
-    follow: 'started following you',
-    reply: 'replied to your howl',
-  }
-
   const notificationIcons = {
     like: <Icons.Heart className='fill-current text-[#f91880]' />,
     rehowl: <Icons.Repeat2 className='text-[#00b87a]' />,
