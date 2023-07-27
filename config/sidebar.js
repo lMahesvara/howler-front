@@ -7,11 +7,6 @@ export const listMenu = [
     href: '/home',
   },
   {
-    name: 'Notifications',
-    icon: <Icons.Bell />,
-    href: '/',
-  },
-  {
     name: 'Messages',
     icon: <Icons.Messages />,
     href: '/',
