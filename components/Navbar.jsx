@@ -31,7 +31,6 @@ const Navbar = () => {
     setUser(null)
   }
 
-  //if (status === 'loading') return null
   return (
     <header className='flex justify-center md:justify-end grow shrink min-w-[68px] sm:min-w-[88px] pt-5 px-2'>
       <div className='flex flex-col  max-w-[300] gap-4 bg-black items-center w-[68px] sm:w-[88px] xl:w-[275px] px-1 fixed xl:items-start'>
@@ -44,6 +43,11 @@ const Navbar = () => {
           {listMenu.map((item, index) => (
             <NavLinks key={index} {...item} />
           ))}
+          <NavLinks
+            href={'/notifications'}
+            name='Notifications'
+            icon={<Icons.Bell />}
+          />
           <NavLinks
             href={`/${user?.username ?? ''}`}
             name='Profile'

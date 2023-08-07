@@ -215,6 +215,14 @@ export const unfollowUser = async (idUserUnfollow, idUser) => {
   }
 }
 
+export const getNotifications = async userTo => {
+  try {
+    return await (await fetch(`${API_URL}/notifications/${userTo}`)).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const deleteHowl = async id => {
   try {
     const response = await fetch(`${API_URL}/howls/${id}`, {
@@ -233,6 +241,22 @@ export const deleteHowl = async id => {
 export const getMentions = async query => {
   try {
     return await (await fetch(`${API_URL}/users/mentions/${query}`)).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const addNotification = async notification => {
+  try {
+    return await (
+      await fetch(`${API_URL}/notifications`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(notification),
+      })
+    ).json()
   } catch (error) {
     console.log(error)
   }
