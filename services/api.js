@@ -200,7 +200,7 @@ export const followUser = async (idUserFollow, idUser) => {
   }
 }
 
-export const unfollowUser = async (idUserUnfollow, idUser) =>{
+export const unfollowUser = async (idUserUnfollow, idUser) => {
   try {
     return await (
       await fetch(`${API_URL}/follow/unfollow/${idUserUnfollow}/${idUser}`, {
@@ -217,8 +217,30 @@ export const unfollowUser = async (idUserUnfollow, idUser) =>{
 
 export const getNotifications = async userTo => {
   try {
-    return await (
-      await fetch(`${API_URL}/notifications/${userTo}`)).json()
+    return await (await fetch(`${API_URL}/notifications/${userTo}`)).json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deleteHowl = async id => {
+  try {
+    const response = await fetch(`${API_URL}/howls/${id}`, {
+      method: 'DELETE',
+    })
+
+    if (response.status === 200) {
+      return await response.json()
+    }
+    throw new Error('Error deleting howl')
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export const getMentions = async query => {
+  try {
+    return await (await fetch(`${API_URL}/users/mentions/${query}`)).json()
   } catch (error) {
     console.log(error)
   }
@@ -236,6 +258,6 @@ export const addNotification = async notification => {
       })
     ).json()
   } catch (error) {
-      console.log(error)
+    console.log(error)
   }
 }

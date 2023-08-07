@@ -1,23 +1,14 @@
 'use client'
-import React, { useState, useEffect } from 'react'
 import SeguirUser from './SeguirUser'
-import { getHowl } from '@/services/api'
 
-const ModalInteracciones = ({ name, howlId, closeModal }) => {
-  const [likes, setLikes] = useState([])
-
-  useEffect(() => {
-    const fetchLikes = () => {
-      getHowl(howlId).then(howl => {
-        setLikes(howl.likes)
-      })
-    }
-
-    fetchLikes()
-  }, [howlId])
+const ModalInteracciones = ({ name, users, closeModal }) => {
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50'>
-      <div className='relative max-w-2xl mx-auto bg-black border border-gray-700 shadow-lg w-96 rounded-3xl md:w-2/5'>
+      <div
+        className='absolute inset-0 z-0 w-full h-full'
+        onClick={closeModal}
+      ></div>
+      <div className='relative w-full max-w-2xl mx-auto bg-black border border-gray-700 shadow-lg rounded-3xl md:w-3/5'>
         <button
           onClick={closeModal}
           className='absolute top-0 right-0 z-50 flex items-center justify-center w-10 h-10 mt-4 mr-4 text-2xl font-bold text-white bg-black rounded-full focus:outline-none hover:bg-gray-700'
@@ -32,8 +23,8 @@ const ModalInteracciones = ({ name, howlId, closeModal }) => {
         </h2>
 
         <div className='flex flex-col p-6 items-left justify-left'>
-          {likes?.map((like, index) => (
-            <SeguirUser key={index} userId={like} />
+          {users?.map((user, index) => (
+            <SeguirUser key={index} userId={user} />
           ))}
         </div>
       </div>

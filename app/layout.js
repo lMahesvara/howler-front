@@ -4,6 +4,9 @@ import { Toaster } from '@/components/Toaster'
 import Session from '@/components/Session'
 const inter = Inter({ subsets: ['latin'] })
 
+import 'primereact/resources/themes/tailwind-light/theme.css'
+import 'primereact/resources/primereact.min.css'
+
 export const metadata = {
   title: 'Howler - Home',
   description: 'Home page',

@@ -22,7 +22,7 @@ const ProfilePage = ({ params }) => {
     `/api/users/username/${username}`,
     () => getUserByUsername(username),
     {
-      revalidateOnFocus: false,
+      refreshInterval: 1000,
     }
   )
 
@@ -62,8 +62,8 @@ const ProfilePage = ({ params }) => {
           openModal={openEditProfile}
           username={username}
         />
-        <section className='w-full'>
-          {user?.howls?.map((howl, index) => (
+        <section className='w-full border-t border-[#2f3336]'>
+          {user?.howls?.toReversed().map((howl, index) => (
             <Post
               key={index}
               idHowl={howl}

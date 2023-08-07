@@ -14,3 +14,21 @@ body {
   color: white;
   width: 100%;
 }
+
+.p-mention .p-mention-panel {
+  width: 95% !important;
+  min-width: 10px !important;
+  max-width: 380px !important;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+}
+
+.p-mention-panel .p-mention-items .p-mention-item.p-highlight {
+  /* make it important */
+  background: #1e1e1e !important;
+  color: inherit !important;
+}
+
+.p-mention-panel .p-mention-items :hover {
+  background: #1e1e1e !important;
+}

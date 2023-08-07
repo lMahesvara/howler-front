@@ -16,7 +16,8 @@ import {
   Lock,
   ImagePlus,
   LogOut,
-  UserCheck
+  UserCheck,
+  Trash2,
 } from 'lucide-react'
 
 export const Icons = {
@@ -38,5 +39,6 @@ export const Icons = {
   FileImage: FileImage,
   ImagePlus: ImagePlus,
   LogOut: LogOut,
-  UserCheck: UserCheck
+  UserCheck: UserCheck,
+  Trash2: Trash2,
 }
